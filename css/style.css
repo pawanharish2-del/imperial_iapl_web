@@ -1,0 +1,5747 @@
+/* ==========================================================================
+   Design Tokens & Variables
+   ========================================================================== */
+:root {
+    --color-bg: #121212;
+    --color-surface: #121212;
+    --color-surface-hover: #1f1f1f;
+    --color-accent: #D3D3D3;
+    /* Silver */
+    --color-text: #FFFFFF;
+    --color-text-muted: #D3D3D3;
+    --color-border: rgba(211, 211, 211, 0.25);
+
+    --font-heading: 'Montserrat', sans-serif;
+    --font-body: 'Montserrat', sans-serif;
+    --header-height: 55px;
+
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ==========================================================================
+   Reset & Base Styles
+   ========================================================================== */
+html {
+    scroll-behavior: auto !important;
+    -webkit-overflow-scrolling: touch;
+    text-rendering: optimizeLegibility;
+}
+
+html.lenis,
+html.lenis body {
+    height: auto;
+}
+
+.lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+    overflow: hidden;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.7;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+img,
+video {
+    backface-visibility: hidden;
+    transform: translateZ(0);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--color-text);
+}
+
+body.menu-open {
+    overflow: hidden;
+    /* Prevent scrolling when mobile menu or mega menu is open */
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: var(--transition-fast);
+}
+
+ul {
+    list-style: none;
+}
+
+button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    color: inherit;
+}
+
+/* ==========================================================================
+   Header & Navigation
+   ========================================================================== */
+.main-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--header-height);
+    background: linear-gradient(90deg, #f0f0f0 0%, #eceaea 32%, #222222 55%, #000000 100%);
+    z-index: 1000;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* Logo */
+.logo a {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.logo-mark {
+    font-family: var(--font-heading);
+    font-weight: 900;
+    font-size: 2.5rem;
+    line-height: 1;
+    color: var(--color-white);
+    position: relative;
+}
+
+.header-logo-img {
+    height: 25px;
+    width: auto;
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.tagline {
+    font-size: 0.5rem;
+    letter-spacing: 1px;
+    color: var(--color-text-muted);
+}
+
+.brand {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+    line-height: 1.1;
+}
+
+/* Desktop Navigation */
+.desktop-nav {
+    display: none;
+    height: 100%;
+}
+
+@media (min-width: 1024px) {
+    .desktop-nav {
+        display: block;
+    }
+}
+
+.nav-links {
+    display: flex;
+    height: 100%;
+    gap: 5px;
+    margin-left: 170px;
+}
+
+.nav-item {
+    height: 120%;
+    display: flex;
+    align-items: center;
+}
+
+.nav-item>a {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 0.7rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    position: relative;
+    padding: 2px 1.4rem 6px 1.4rem;
+    /* Reduced top padding to bring line close to text */
+    border-top: 1px solid rgba(255, 255, 255, 0.6);
+    color: #ffffffee;
+}
+
+/* Specific gradient for the WEAPONS line to blend with the background */
+.nav-item:first-child>a {
+    border-image: linear-gradient(to right, rgba(128, 128, 128, 0.2), rgba(255, 255, 255, 0.6)) 1;
+}
+
+.nav-item>a::after {
+    content: '';
+    position: absolute;
+    bottom: 6px;
+    /* Bring the line closer to just below the text */
+    left: 1.4rem;
+    /* Start exactly where the text begins */
+    width: 0;
+    height: 1px;
+    background-color: #d9d9d9dc;
+    /* Red bar on hover */
+    transition: var(--transition-normal);
+}
+
+.nav-item>a:hover::after,
+.nav-item.active>a::after {
+    width: calc(100% - 2.8rem);
+    /* Only span the width of the text */
+}
+
+.nav-item>a:hover,
+.nav-item.active>a {
+    color: #cac4c4;
+    /* Red text on hover */
+}
+
+/* Header Tools */
+.header-tools {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.lang-switcher {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.lang-switcher .divider {
+    color: var(--color-border);
+}
+
+.lang {
+    opacity: 0.5;
+    transition: var(--transition-fast);
+}
+
+.lang:hover,
+.lang.active {
+    opacity: 1;
+}
+
+.close-menu-btn {
+    width: 24px;
+    height: 24px;
+    color: var(--color-text);
+    transition: var(--transition-fast);
+}
+
+.close-menu-btn:hover {
+    color: var(--color-accent);
+    transform: scale(1.1);
+}
+
+/* Mobile Toggle (Hamburger) */
+.mobile-menu-toggle {
+    display: block;
+    width: 30px;
+    height: 20px;
+    position: relative;
+    z-index: 1001;
+    /* Above drawer */
+}
+
+@media (min-width: 1024px) {
+    .mobile-menu-toggle {
+        display: none;
+    }
+}
+
+.hamburger,
+.hamburger::before,
+.hamburger::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: var(--color-text);
+    transition: var(--transition-normal);
+}
+
+.hamburger {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.hamburger::before {
+    top: -8px;
+}
+
+.hamburger::after {
+    bottom: -8px;
+}
+
+.mobile-menu-toggle.active .hamburger {
+    background-color: transparent;
+}
+
+.mobile-menu-toggle.active .hamburger::before {
+    top: 0;
+    transform: rotate(45deg);
+}
+
+.mobile-menu-toggle.active .hamburger::after {
+    bottom: 0;
+    transform: rotate(-45deg);
+}
+
+
+/* ==========================================================================
+   Mega Menus
+   ========================================================================== */
+.mega-menus-wrapper {
+    position: absolute;
+    top: var(--header-height);
+    left: 0;
+    width: 100%;
+    background-color: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+    visibility: hidden;
+    opacity: 0;
+    transition: var(--transition-normal);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+}
+
+.mega-menus-wrapper.open {
+    visibility: visible;
+    opacity: 1;
+}
+
+.mega-menu {
+    display: none;
+    width: 100%;
+    padding: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height var(--transition-slow);
+}
+
+.mega-menu.active {
+    display: block;
+    max-height: 80vh;
+    /* Slide down animation limit */
+}
+
+/* Mega Menu Tabs (WEAPONS) */
+.mega-menu-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    border-bottom: 1px solid var(--color-border);
+    padding: 0 2rem;
+    background-color: #121212;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.mega-menu-tabs::-webkit-scrollbar {
+    display: none;
+}
+
+.tab-btn {
+    padding: 1.5rem 0;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: var(--color-text-muted);
+    position: relative;
+    white-space: nowrap;
+}
+
+.tab-btn::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--color-accent);
+    transform: scaleX(0);
+    transition: var(--transition-normal);
+}
+
+.tab-btn:hover {
+    color: var(--color-text);
+}
+
+.tab-btn.active {
+    color: var(--color-text);
+}
+
+.tab-btn.active::after {
+    transform: scaleX(1);
+}
+
+/* Mega Menu Content Area */
+.mega-menu-content {
+    padding: 3rem 2rem;
+    max-width: 1600px;
+    margin: 0 auto;
+    overflow-y: auto;
+    max-height: calc(80vh - 70px);
+}
+
+/* Product Grid (WEAPONS) */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 2rem;
+    transition: opacity var(--transition-normal);
+}
+
+.product-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    background-color: transparent;
+    border-radius: 4px;
+    transition: var(--transition-normal);
+    text-align: center;
+}
+
+.product-card:hover {
+    background-color: var(--color-surface-hover);
+}
+
+.img-wrapper {
+    width: 100%;
+    aspect-ratio: 16/9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    overflow: hidden;
+}
+
+.product-card img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    transition: transform var(--transition-normal);
+}
+
+.product-card:hover img {
+    transform: scale(1.05);
+}
+
+.product-card h3 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: var(--color-text);
+    transition: color var(--transition-fast);
+}
+
+.product-card:hover h3 {
+    color: var(--color-accent);
+}
+
+/* Links Layout (PRODUCTS & MEDIA) */
+.links-layout {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4rem;
+    justify-content: center;
+}
+
+.links-column h4 {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    color: var(--color-accent);
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+}
+
+.links-column ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.links-column a {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    font-weight: 500;
+}
+
+.links-column a:hover {
+    color: var(--color-text);
+    padding-left: 5px;
+}
+
+
+/* ==========================================================================
+   Mobile Drawer Menu
+   ========================================================================== */
+.mobile-drawer {
+    position: fixed;
+    top: var(--header-height);
+    right: 0;
+    width: 100%;
+    height: calc(100vh - var(--header-height));
+    background-color: var(--color-surface);
+    z-index: 999;
+    transform: translateX(100%);
+    transition: transform var(--transition-normal);
+    overflow-y: auto;
+}
+
+.mobile-drawer.open {
+    transform: translateX(0);
+}
+
+.mobile-nav {
+    padding: 2rem;
+}
+
+.mobile-nav-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.mobile-nav-item {
+    border-bottom: 1px solid var(--color-border);
+}
+
+.mobile-nav-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 0;
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.mobile-nav-item.has-submenu .mobile-nav-link::after {
+    content: '+';
+    font-size: 1.5rem;
+    font-weight: 300;
+    transition: transform var(--transition-fast);
+}
+
+.mobile-nav-item.open .mobile-nav-link::after {
+    transform: rotate(45deg);
+    color: var(--color-accent);
+}
+
+.mobile-submenu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height var(--transition-normal);
+}
+
+.mobile-nav-item.open .mobile-submenu {
+    max-height: 500px;
+    /* Adjust based on content */
+    padding-bottom: 1.5rem;
+}
+
+.mobile-submenu a {
+    display: block;
+    padding: 0.75rem 0 0.75rem 1rem;
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+    letter-spacing: 1px;
+}
+
+.mobile-submenu a:hover {
+    color: var(--color-accent);
+}
+
+
+/* ==========================================================================
+   Hero Section
+   ========================================================================== */
+.hero {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    background-image: url('../assets/images/hero-bg.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    padding-top: var(--header-height);
+    padding-bottom: 4rem;
+    /* Offset for fixed header */
+}
+
+.hero-bg-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    pointer-events: none;
+}
+
+.hero-content {
+    position: absolute;
+    bottom: 3.5rem;
+    left: 3.5rem;
+    z-index: 10;
+    max-width: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+}
+
+.hero h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -1px;
+    margin-bottom: 0.4rem;
+}
+
+.accent-red {
+    color: var(--color-accent);
+}
+
+.hero .subtitle {
+    font-size: clamp(0.85rem, 1.2vw, 1.05rem);
+    color: #E0E0E0;
+    margin-bottom: 1.2rem;
+    max-width: none;
+    white-space: nowrap;
+    font-weight: 400;
+    line-height: 1.4;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 0.2rem 2rem;
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #121212;
+    background: #D3D3D3;
+    border-radius: 1px;
+    transition: var(--transition-normal);
+}
+
+.cta-button:hover {
+    background-color: #121212;
+    color: #D3D3D3;
+    border-color: #D3D3D3;
+}
+
+/* ==========================================================================
+   Utility Classes
+   ========================================================================== */
+.hidden {
+    display: none !important;
+}
+
+/* ==========================================================================
+   Light Theme Mega Menu (Weapons)
+   ========================================================================== */
+.theme-light {
+    background-color: #F5F5F5;
+    color: #D3D3D3;
+}
+
+/* Custom Weapons Mega Menu (Prominent Weapon Scale) */
+.weapons-custom-menu {
+    background-color: #FFFFFF !important;
+    padding: 3.5rem 2rem 4rem 2rem;
+    position: relative;
+    border-bottom: 1px solid #E5E5E5;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+}
+
+.weapons-custom-menu .close-menu-inline {
+    display: none !important;
+}
+
+.weapons-nav-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 6rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    box-sizing: border-box;
+}
+
+.weapon-nav-column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-decoration: none;
+    color: inherit;
+    width: 360px;
+    max-width: 380px;
+    cursor: pointer;
+    transition: transform 0.25s ease;
+}
+
+.weapon-nav-column:hover {
+    transform: translateY(-3px);
+}
+
+.weapon-nav-img-wrap {
+    width: 100%;
+    height: 140px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    margin-bottom: 1.75rem;
+}
+
+.weapon-nav-img-wrap img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    object-position: left bottom;
+    transition: transform 0.25s ease;
+}
+
+/* Modern Rifle - wide prominent scale */
+.weapon-nav-column:first-child .weapon-nav-img-wrap img {
+    width: 100%;
+    max-height: 125px;
+}
+
+/* Small Arms - tall prominent scale */
+.weapon-nav-column:last-child .weapon-nav-img-wrap img {
+    height: 130px;
+    width: auto;
+    max-width: 200px;
+}
+
+.weapon-nav-column:hover .weapon-nav-img-wrap img {
+    transform: scale(1.03);
+}
+
+.weapon-nav-details {
+    width: 100%;
+    text-align: left;
+}
+
+.weapon-nav-title {
+    font-family: var(--font-body, 'Montserrat', sans-serif);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #000000;
+    margin: 0 0 0.5rem 0;
+    letter-spacing: 0.1px;
+    text-transform: none;
+    line-height: 1.2;
+}
+
+.weapon-nav-line {
+    width: 100%;
+    height: 1.5px;
+    background-color: #333333;
+    margin-bottom: 0.75rem;
+    transition: background-color 0.2s ease;
+}
+
+.weapon-nav-column:hover .weapon-nav-line {
+    background-color: #000000;
+}
+
+.weapon-nav-desc {
+    font-family: var(--font-body, 'Montserrat', sans-serif);
+    font-size: 0.82rem;
+    font-weight: 400;
+    color: #777777;
+    line-height: 1.45;
+    margin: 0;
+    letter-spacing: 0.1px;
+}
+
+@media (max-width: 768px) {
+    .weapons-custom-menu {
+        padding: 2rem 1.5rem 2.5rem 1.5rem;
+    }
+
+    .weapons-nav-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 2.5rem;
+    }
+
+    .weapon-nav-column {
+        width: 100%;
+        max-width: 320px;
+    }
+}
+
+.theme-light-tabs {
+    background-color: #F5F5F5;
+    border-bottom: 1px solid rgba(211, 211, 211, 0.25);
+    position: relative;
+    padding-right: 4rem;
+    /* space for close btn */
+}
+
+.theme-light-tabs .tab-btn {
+    color: #939191;
+}
+
+.theme-light-tabs .tab-btn:hover {
+    color: #121212;
+}
+
+.theme-light-tabs .tab-btn.active {
+    color: #121212;
+}
+
+.theme-light-tabs .tab-btn::after {
+    background-color: #121212;
+    /* black underline instead of red */
+}
+
+.close-menu-inline {
+    position: absolute;
+    right: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 32px;
+    height: 32px;
+    color: #121212;
+    transition: var(--transition-fast);
+}
+
+.close-menu-inline:hover {
+    color: var(--color-accent);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.light-card {
+    background-color: transparent;
+    text-align: left;
+    align-items: flex-start;
+    padding: 0.5rem;
+}
+
+.light-card:hover {
+    background-color: #f5f5f5;
+}
+
+.light-card h3 {
+    color: #121212;
+    font-size: 0.8rem;
+    font-weight: 800;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+}
+
+.light-card p {
+    color: #1f1f1f;
+    font-size: 0.75rem;
+    line-height: 1.4;
+}
+
+.light-card:hover h3 {
+    color: #121212;
+    /* stays black on hover */
+}
+
+/* ==========================================================================
+   Products Card Layout
+   ========================================================================== */
+.products-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+    align-items: center;
+}
+
+.products-card .product-header {
+    margin-bottom: 1rem;
+    width: 100%;
+}
+
+.products-card .product-header h3 {
+    margin-bottom: 0.25rem;
+    margin-top: 0;
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.products-card .product-header h3 strong {
+    font-weight: 800;
+}
+
+.products-card .price {
+    color: #D3D3D3;
+    /* Hera Red */
+    font-size: 0.7rem;
+    font-weight: 500;
+}
+
+.products-card .img-wrapper {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.products-card .product-bottom-text {
+    font-size: 0.7rem;
+    color: #D3D3D3;
+    margin-top: auto;
+}
+
+/* ==========================================================================
+   ALL Layout (Weapons Menu)
+   ========================================================================== */
+.all-layout-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem 0;
+    gap: 2rem;
+}
+
+.all-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3rem;
+    flex: 1;
+}
+
+.all-column h4 {
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: #121212;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+}
+
+.all-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.all-column li {
+    font-size: 0.75rem;
+    color: #D3D3D3;
+    text-transform: uppercase;
+}
+
+.all-column li:hover {
+    color: #121212;
+    cursor: pointer;
+}
+
+.all-image {
+    flex: 0 0 350px;
+    /* Fixed width for the image container */
+    max-width: 350px;
+}
+
+.all-image img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+/* ==========================================================================
+   MEDIA Menu Layout
+   ========================================================================== */
+.media-mega-menu {
+    min-height: 250px;
+}
+
+.media-links-layout {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 2.5rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.media-divider {
+    width: 1px;
+    background-color: #D3D3D3;
+    margin: 0 1rem;
+}
+
+.media-column {
+    display: flex;
+    flex-direction: column;
+    min-width: 200px;
+}
+
+.media-column h4 {
+    font-size: 1.1rem;
+    font-weight: 900;
+    color: #121212;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+}
+
+.media-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.media-column li a,
+.media-column p {
+    font-size: 0.95rem;
+    color: #D3D3D3;
+    text-decoration: none;
+    line-height: 1.5;
+}
+
+.media-column li a:hover {
+    color: #121212;
+}
+
+/* ==========================================================================
+   Product Spotlight Layout
+   ========================================================================== */
+.product-spotlight,
+.sniper-details-section {
+    background-color: #ffffff !important;
+    padding: 3.5rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    color: #121212;
+}
+
+.spotlight-container,
+.sniper-spotlight-container {
+    max-width: 1200px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3rem;
+}
+
+.nav-arrow {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #D3D3D3;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.3s ease;
+}
+
+.nav-arrow svg {
+    width: 32px;
+    height: 32px;
+}
+
+.nav-arrow:hover {
+    color: #121212;
+}
+
+.spotlight-left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right;
+}
+
+.spotlight-left h2 {
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-bottom: 0.25rem;
+    white-space: nowrap;
+    color: #121212;
+}
+
+.spotlight-left h2 strong {
+    font-weight: 900;
+}
+
+.spotlight-subtitle {
+    font-size: 0.9rem;
+    color: #555555;
+    margin-bottom: 0.75rem;
+}
+
+.spotlight-badge {
+    background-color: #D3D3D3;
+    color: #121212;
+    font-size: 0.75rem;
+    font-weight: 800;
+    padding: .1rem .3rem;
+    display: inline-block;
+    margin-bottom: 1.5rem;
+}
+
+.spotlight-btn {
+    background-color: #999999;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 0.85rem;
+    padding: 0.2rem 2rem;
+    transition: background-color 0.3s ease;
+}
+
+.spotlight-btn:hover {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+.spotlight-center {
+    flex: 1.5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.spotlight-center img {
+    max-width: 90%;
+    height: auto;
+}
+
+.spotlight-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.spotlight-desc {
+    font-size: 0.85rem;
+    color: #D3D3D3;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+}
+
+.spotlight-features {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.spotlight-features li {
+    font-size: 0.8rem;
+    color: #D3D3D3;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.red-plus {
+    color: #D3D3D3;
+    font-weight: 900;
+}
+
+/* ==========================================================================
+   Parallax Section (HERA LINK SERIES)
+   ========================================================================== */
+.parallax-section {
+    position: relative;
+    height: 65vh;
+    min-height: 480px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    color: #F5F5F5;
+    padding-top: 0;
+    clip-path: inset(0 0 0 0);
+    -webkit-clip-path: inset(0 0 0 0);
+    overflow: hidden;
+    background: #0d0d0d;
+}
+
+.parallax-bg-fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 1;
+    will-change: transform;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    pointer-events: none;
+}
+
+.parallax-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to left, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.1) 100%);
+}
+
+.parallax-content {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding-right: 3rem;
+    padding-left: 1rem;
+    display: flex;
+    justify-content: flex-end;
+    box-sizing: border-box;
+}
+
+.parallax-text-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right;
+    margin-left: auto;
+}
+
+.parallax-text-container h2 {
+    font-size: 2rem;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.2rem;
+    line-height: 1.1;
+    white-space: nowrap;
+    color: #ffffff;
+    text-transform: uppercase;
+}
+
+.parallax-text-container h2 strong {
+    font-weight: 900;
+}
+
+.parallax-section.align-left {
+    justify-content: flex-start;
+    padding-top: 3rem;
+}
+
+.parallax-section.align-left .parallax-content {
+    justify-content: flex-start;
+    padding-left: 5rem;
+}
+
+.parallax-section.align-left .parallax-text-container {
+    align-items: flex-start;
+    text-align: left;
+}
+
+.parallax-subtitle {
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    margin-bottom: 0.6rem;
+    color: #ffffff;
+    text-transform: uppercase;
+    text-align: right;
+}
+
+.parallax-badge {
+    background-color: #FFFFFF;
+    color: #121212;
+    font-size: 0.8rem;
+    font-weight: 800;
+    padding: 0.35rem 0.75rem;
+    margin-bottom: 0.5rem;
+    display: inline-block;
+    letter-spacing: 0.5px;
+    border-radius: 1px;
+    text-align: right;
+}
+
+.parallax-btn {
+    display: inline-block;
+    background-color: #121212 !important;
+    color: #ffffff !important;
+    border: none;
+    border-radius: 1px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 0.45rem 1.6rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    align-self: flex-end;
+}
+
+.parallax-btn:hover {
+    background-color: #333333 !important;
+    color: #ffffff !important;
+}
+
+/* ==========================================================================
+   Vertical Rifle Section (GEN4 RIFLE SERIES)
+   ========================================================================== */
+.vertical-rifle-section {
+    background-color: #F5F5F5;
+    padding: 3rem 2rem 1rem 2rem;
+    display: flex;
+    justify-content: center;
+    color: #121212;
+}
+
+.vertical-rifle-container {
+    max-width: 1200px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4rem;
+}
+
+.vertical-rifle-image {
+    flex: 1 1 450px;
+    max-width: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.vertical-rifle-image img {
+    position: relative;
+    transform: none;
+    max-width: 100%;
+    width: 100%;
+    max-height: 750px;
+    height: auto;
+    object-fit: contain;
+}
+
+.vertical-rifle-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.vertical-rifle-content h2 {
+    font-size: 1.5rem;
+    font-weight: 300;
+    letter-spacing: 1px;
+    margin-bottom: 0.25rem;
+    text-transform: uppercase;
+    color: #121212;
+}
+
+.vertical-rifle-content h2 strong {
+    font-weight: 900;
+}
+
+.vertical-rifle-subtitle {
+    font-size: 0.8rem;
+    color: #121212;
+    margin-bottom: 0.75rem;
+    letter-spacing: 1px;
+}
+
+.vertical-rifle-badge {
+    background-color: #D3D3D3;
+    color: #121212;
+    padding: 0.15rem 0.5rem;
+    display: inline-block;
+    font-size: 0.85rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+}
+
+.vertical-rifle-btn {
+    display: inline-block;
+    background-color: #D3D3D3;
+    color: #121212;
+    border: 1px solid #D3D3D3;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: .2rem 2rem;
+    margin-bottom: 3rem;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.vertical-rifle-btn:hover {
+    background-color: #121212;
+    color: #D3D3D3;
+    border-color: #D3D3D3;
+}
+
+.vertical-rifle-specs-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.vertical-rifle-specs {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.vertical-rifle-specs li {
+    font-size: 0.75rem;
+    color: #121212;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    text-transform: uppercase;
+}
+
+.catalog-grid-section {
+    background-color: #F5F5F5;
+    padding: 1rem 2rem 3rem 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.catalog-grid-container {
+    max-width: 1100px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.catalog-card {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+    background-color: #121212;
+    overflow: hidden;
+    border-radius: 0px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    text-align: left;
+}
+
+.catalog-card img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.85;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.catalog-card:hover img {
+    transform: scale(1.03);
+    opacity: 0.95;
+}
+
+.catalog-card-content {
+    position: relative;
+    z-index: 10;
+    padding: 1.2rem;
+    color: #FFFFFF;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    box-sizing: border-box;
+}
+
+.catalog-card-content h3 {
+    font-size: 1.15rem;
+    font-weight: 400;
+    margin-bottom: 0.15rem;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+.catalog-card-content h3 strong {
+    font-weight: 900;
+}
+
+.catalog-card-content p {
+    font-size: 0.72rem;
+    color: #E0E0E0;
+    margin-bottom: 0.4rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+.catalog-card-badge {
+    background-color: #FFFFFF;
+    color: #121212;
+    font-size: 0.65rem;
+    font-weight: 800;
+    padding: 0.2rem 0.5rem;
+    margin-bottom: 0.5rem;
+    display: inline-block;
+    letter-spacing: 0.5px;
+    border-radius: 1px;
+    text-transform: uppercase;
+}
+
+.catalog-card-btn {
+    display: inline-block;
+    width: fit-content;
+    background-color: #121212 !important;
+    color: #FFFFFF !important;
+    border: none;
+    border-radius: 1px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 0.4rem 1rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.catalog-card-btn:hover {
+    background-color: #333333 !important;
+    color: #FFFFFF !important;
+}
+
+.catalog-text-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 0 0 0 1.2rem;
+    color: #121212;
+}
+
+.catalog-text-block h2 {
+    font-size: 2.8rem;
+    font-weight: 900;
+    margin-top: -6px;
+    margin-bottom: 1.2rem;
+    text-transform: uppercase;
+    line-height: 1.05;
+    color: #000000;
+    letter-spacing: -0.5px;
+}
+
+.catalog-text-block p {
+    font-size: 0.95rem;
+    color: #4A4A4A;
+    line-height: 1.55;
+    font-weight: 400;
+    margin: 0;
+}
+
+/* ==========================================================================
+   Scroll Animations
+   ========================================================================== */
+.scroll-animate-left {
+    opacity: 0;
+    transform: translate3d(-35px, 0, 0);
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+    backface-visibility: hidden;
+}
+
+.scroll-animate-left.visible {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    will-change: auto;
+}
+
+.scroll-animate-right {
+    opacity: 0;
+    transform: translate3d(35px, 0, 0);
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+    backface-visibility: hidden;
+}
+
+.scroll-animate-right.visible {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    will-change: auto;
+}
+
+.scroll-animate-up {
+    opacity: 0;
+    transform: translate3d(0, 30px, 0);
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+    backface-visibility: hidden;
+}
+
+.scroll-animate-up.visible {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    will-change: auto;
+}
+
+/* Sizing refinement for Ammo Maker image */
+.ammo-maker-img {
+    max-width: 380px !important;
+    width: 76% !important;
+    height: auto !important;
+    object-fit: contain !important;
+}
+
+/* Kinetic Scramble → Assemble Text Effect */
+.kinetic-scramble {
+    display: inline-block;
+    vertical-align: baseline;
+}
+
+.k-word {
+    display: inline-block;
+    white-space: nowrap;
+    vertical-align: baseline;
+}
+
+.k-char-slot {
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    vertical-align: baseline;
+    line-height: inherit;
+}
+
+.k-char {
+    display: inline-block;
+    vertical-align: baseline;
+    line-height: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    color: inherit;
+    letter-spacing: inherit;
+    will-change: transform, opacity;
+}
+
+.k-assembled .k-char-slot {
+    overflow: visible;
+}
+
+.k-assembled .k-char {
+    transform: none !important;
+    opacity: 1 !important;
+    filter: none !important;
+}
+
+/* ==========================================================================
+   About Us Hero Banner (Desert Rifle with Scattered Golden Bullets)
+   ========================================================================== */
+.about-hero {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 5.2;
+    min-height: 260px;
+    max-height: 480px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-color: #0d0d0d;
+}
+
+.about-hero .hero-bg-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../assets/images/About-01.webp');
+    background-size: cover !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    z-index: 1;
+}
+
+.about-hero .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.04) 50%, rgba(0, 0, 0, 0.28) 100%);
+    pointer-events: none;
+    z-index: 2;
+}
+
+.about-hero .hero-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    text-align: center;
+    width: 100%;
+    padding: 0 1rem;
+}
+
+.about-hero .hero-content h1 {
+    font-family: 'Montserrat', 'Inter', system-ui, -apple-system, sans-serif;
+    font-size: clamp(2rem, 4.5vw, 3.5rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    margin: 0;
+    letter-spacing: 4px;
+    color: #ffffff;
+    text-shadow: 0 4px 18px rgba(0, 0, 0, 0.75), 0 2px 4px rgba(0, 0, 0, 0.9);
+    line-height: 1.2;
+}
+
+@media (max-width: 768px) {
+    .about-hero {
+        aspect-ratio: unset !important;
+        min-height: 310px !important;
+        height: 42vh !important;
+        max-height: 420px !important;
+    }
+
+    .about-hero .hero-bg-image {
+        background-size: cover !important;
+        background-position: center 65% !important;
+    }
+
+    .about-hero .hero-content h1 {
+        font-size: 2.1rem !important;
+        letter-spacing: 2.5px !important;
+    }
+}
+
+/* ==========================================================================
+   About Us Section (Mountains)
+   ========================================================================== */
+/* ==========================================================================
+   About Us Banner Section (Exact 1:1 Match to Reference Image)
+   ========================================================================== */
+.about-hero-section {
+    position: relative;
+    width: 100%;
+    background-color: #ffffff;
+    overflow: hidden;
+    border-top: 1px solid #e2e5e8;
+}
+
+.about-banner-container {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    background-color: #ffffff;
+}
+
+/* DSR-1 Tech Specs Bar — Exact Reference Match */
+.dsr-specs-bar-exact {
+    width: 100%;
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 48px;
+    padding: 0 1rem;
+    position: relative;
+    z-index: 5;
+    gap: 0;
+}
+
+.dsr-spec-col {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Michroma', 'Montserrat', sans-serif;
+    user-select: none;
+    padding: 0 clamp(0.5rem, 1.4vw, 1.6rem);
+}
+
+.dsr-spec-line {
+    width: 1.5px;
+    height: 26px;
+    background-color: #b4b9be;
+    flex-shrink: 0;
+}
+
+/* DSR-1 logo — wide geometric extended (Bold Grey) */
+.dsr-spec-logo {
+    font-family: 'Michroma', sans-serif;
+    font-size: clamp(1.3rem, 1.75vw, 1.65rem);
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: #60666d;
+    line-height: 1;
+}
+
+/* Default number size (Bold Grey) */
+.dsr-spec-num {
+    font-family: 'Michroma', sans-serif;
+    font-size: clamp(1.15rem, 1.55vw, 1.5rem);
+    font-weight: 800;
+    color: #60666d;
+    line-height: 1;
+    letter-spacing: 0.5px;
+}
+
+/* 690MM — the LARGEST item in the bar (Bold Grey) */
+.dsr-spec-num-large {
+    font-family: 'Michroma', sans-serif;
+    font-size: clamp(1.45rem, 1.95vw, 1.9rem);
+    font-weight: 800;
+    color: #4e535a;
+    line-height: 1;
+    letter-spacing: 1px;
+}
+
+.dsr-spec-stacked {
+    display: inline-flex;
+    flex-direction: column;
+    text-align: left;
+    margin-left: 0.25rem;
+    line-height: 1.05;
+    gap: 0;
+}
+
+.dsr-spec-stacked span {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.48rem;
+    font-weight: 800;
+    letter-spacing: 0.6px;
+    color: #60666d;
+    text-transform: uppercase;
+}
+
+.dsr-spec-col-vertical {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 1;
+}
+
+.dsr-spec-sub {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.48rem;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    color: #60666d;
+    margin-top: 2px;
+    text-transform: uppercase;
+}
+
+.dsr-spec-inline {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+    color: #60666d;
+    margin-left: 0.25rem;
+    text-transform: uppercase;
+}
+
+.dsr-spec-sup {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 800;
+    color: #60666d;
+    vertical-align: top;
+    margin-left: 0.06rem;
+    position: relative;
+    top: -0.55em;
+    text-transform: uppercase;
+}
+
+/* Banner Content Area: Left "About Us" (Shifted 10% right) and Compact Fort Cutout */
+.about-banner-content-row {
+    position: relative;
+    width: 100%;
+    height: 250px;
+    min-height: 230px;
+    max-height: 270px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    background-color: #ffffff;
+    border-bottom: none !important;
+}
+
+.about-banner-left-title {
+    position: relative;
+    z-index: 10;
+    padding-left: clamp(4.5rem, 18vw, 17rem);
+    padding-top: 32px;
+    width: auto;
+    flex-shrink: 0;
+}
+
+.about-banner-heading {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(2.4rem, 3.2vw, 3.3rem);
+    font-weight: 800;
+    color: #000000;
+    text-transform: none;
+    margin: 0;
+    padding: 0;
+    letter-spacing: 0.3px;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.about-banner-right-fort {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 68%;
+    max-width: 1150px;
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    pointer-events: none;
+    line-height: 0;
+    font-size: 0;
+}
+
+.about-fort-cutout-img {
+    width: 100%;
+    height: 100%;
+    max-height: 250px;
+    object-fit: contain;
+    object-position: right bottom;
+    display: block;
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+
+@media (max-width: 1200px) {
+    .about-banner-content-row {
+        height: 215px;
+        min-height: 200px;
+    }
+
+    .about-banner-left-title {
+        padding-left: clamp(3.5rem, 14vw, 11rem);
+        padding-top: 25px;
+    }
+
+    .about-fort-cutout-img {
+        max-height: 215px;
+    }
+
+    .about-banner-heading {
+        font-size: 2.7rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .dsr-specs-bar-exact {
+        height: auto;
+        flex-wrap: wrap;
+        gap: 0.6rem 0;
+        padding: 0.7rem 1rem;
+    }
+
+    .dsr-spec-line {
+        display: none;
+    }
+
+    .dsr-spec-col {
+        flex: 1 1 33.33%;
+        padding: 0.35rem;
+    }
+
+    .about-banner-content-row {
+        height: 185px;
+        min-height: 175px;
+    }
+
+    .about-banner-left-title {
+        padding-left: clamp(2.5rem, 10vw, 6rem);
+        padding-top: 18px;
+    }
+
+    .about-banner-heading {
+        font-size: 2.2rem;
+    }
+
+    .about-banner-right-fort {
+        width: 65%;
+    }
+
+    .about-fort-cutout-img {
+        max-height: 185px;
+    }
+}
+
+@media (max-width: 768px) {
+    .dsr-specs-bar-exact {
+        padding: 0.5rem 0.4rem;
+    }
+
+    .dsr-spec-col {
+        flex: 1 1 33.33%;
+        padding: 0.25rem;
+    }
+
+    .about-banner-content-row {
+        height: 155px;
+        min-height: 150px;
+    }
+
+    .about-banner-left-title {
+        padding-left: clamp(1.5rem, 6vw, 3rem);
+        padding-top: 12px;
+    }
+
+    .about-banner-heading {
+        font-size: 1.75rem;
+    }
+
+    .about-banner-right-fort {
+        width: 62%;
+    }
+
+    .about-fort-cutout-img {
+        max-height: 150px;
+    }
+}
+
+@media (max-width: 480px) {
+    .dsr-spec-col {
+        flex: 1 1 48%;
+        padding: 0.2rem;
+    }
+
+    .about-banner-content-row {
+        height: 135px;
+        min-height: 130px;
+    }
+
+    .about-banner-left-title {
+        padding-left: 1rem;
+        padding-top: 8px;
+    }
+
+    .about-banner-heading {
+        font-size: 1.45rem;
+    }
+
+    .about-banner-right-fort {
+        width: 60%;
+    }
+
+    .about-fort-cutout-img {
+        max-height: 130px;
+    }
+}
+
+@keyframes scrollMarquee {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.brand-logo {
+    color: #a0a0a0;
+    text-transform: uppercase;
+    align-items: center;
+    line-height: 1;
+    display: flex;
+    font-family: 'Michroma', sans-serif;
+    font-weight: 400;
+}
+
+.brand-logo .main {
+    font-size: 1.9rem;
+    transform: scaleX(1.25);
+    transform-origin: center;
+    display: inline-block;
+    margin: 0 1.2rem;
+    letter-spacing: 2px;
+    -webkit-text-stroke: 1.2px currentColor;
+}
+
+.brand-logo .prefix,
+.brand-logo .suffix {
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    display: inline-block;
+    position: relative;
+    z-index: 2;
+    transform: scaleX(1.15);
+    transform-origin: center;
+    -webkit-text-stroke: 0.6px currentColor;
+    margin: 0 0.4rem;
+}
+
+/* H6 RIFLE */
+.h6-logo {
+    position: relative;
+    justify-content: center;
+}
+
+.h6-logo .main {
+    margin: 0 1.2rem;
+}
+
+.h6-logo .prefix.top {
+    position: relative;
+    top: 0.4rem;
+    margin-right: -1rem;
+}
+
+.h6-logo .suffix.bottom {
+    position: relative;
+    bottom: -0.3rem;
+    margin-left: -0.7rem;
+}
+
+/* SRB, 7SIX2 */
+.stacked-logo {
+    flex-direction: column;
+    align-items: center;
+}
+
+.stacked-logo .suffix.right {
+    margin-top: 0rem;
+    margin-right: 0;
+}
+
+/* THE9 ERS, THE15 TH */
+.inline-logo .suffix.top {
+    align-self: flex-start;
+    margin-top: 0.2rem;
+    margin-left: -0rem;
+}
+
+.inline-logo .suffix.bottom {
+    align-self: flex-end;
+    margin-bottom: 0.2rem;
+    margin-left: -0rem;
+}
+
+/* SERIES 7 */
+.series-logo .prefix.middle {
+    align-self: center;
+    margin-right: -1rem;
+}
+
+.about-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    width: 100%;
+    margin: 10rem 0 3rem 0;
+    /* Increased top margin from 3rem to 8rem to push text down closer to the mountains */
+    padding: 0;
+}
+
+.about-content h2 {
+    font-size: 51px;
+    font-weight: 900;
+    color: #4a443d;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+}
+
+.mountains-background {
+    width: 100%;
+    /* Slightly wider aspect ratio to reduce the height of the black void at the bottom */
+    aspect-ratio: 28 / 9;
+    min-height: 45vh;
+    /* Maintains mobile height */
+    background-image: url('../assets/images/mountains-bg.png');
+    /* Shifted image up so peaks are visible and black bottom is cut off */
+    background-position: center 75%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: 1;
+    /* Fades the top of the mountain image into the white background seamlessly */
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 1) 30%, rgba(0, 0, 0, 1) 100%);
+    mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 1) 30%, rgba(0, 0, 0, 1) 100%);
+}
+
+
+
+/* ==========================================================================
+   About Details Section
+   ========================================================================== */
+.about-details {
+    background-color: #000000;
+    padding: 3rem 2rem;
+    display: flex;
+    justify-content: center;
+    color: #F5F5F5;
+}
+
+.about-details-container {
+    max-width: 1200px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.about-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+}
+
+.about-details-image {
+    width: 100%;
+}
+
+.about-details-image img {
+    width: 78%;
+    height: auto;
+    border-radius: 6px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.about-details-text {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.about-details-text p {
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: #ffffff;
+    letter-spacing: 0.2px;
+}
+
+.highlight-grey {
+    color: #a8a8a8;
+    font-weight: 800;
+}
+
+/* ==========================================================================
+   H6 Spotlight Section
+   ========================================================================== */
+.h6-spotlight {
+    background-color: #FFFFFF;
+    padding: 1.2rem 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.h6-spotlight-container {
+    max-width: 1140px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3.5rem;
+    align-items: center;
+}
+
+.h6-image-left {
+    display: flex;
+    width: 100%;
+}
+
+.h6-image-left img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0px;
+    box-shadow: none;
+}
+
+.h6-content-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    text-align: left;
+}
+
+.h6-content-right h2 {
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: #000000;
+    text-transform: uppercase;
+    line-height: 1.0;
+    letter-spacing: -1px;
+    margin-top: 0;
+    margin-bottom: 0.8rem;
+}
+
+.h6-content-right p {
+    font-size: 1.05rem;
+    line-height: 1.45;
+    color: #222222;
+    font-weight: 400;
+    margin-bottom: 1.8rem;
+    max-width: 480px;
+}
+
+.h6-small-image {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.h6-small-image img {
+    width: 100%;
+    max-width: 440px;
+    height: auto;
+    object-fit: contain;
+}
+
+/* ==========================================================================
+   Follow Us Section
+   ========================================================================== */
+.follow-us {
+    position: relative;
+    padding: 3rem 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('../assets/images/followus-bg.webp');
+    background-size: cover;
+    background-position: center;
+}
+
+.follow-us-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.75);
+    /* Dark moody overlay */
+    z-index: 1;
+}
+
+.follow-us-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: #F5F5F5;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2rem;
+    /* Reduced gap for tighter grouping */
+}
+
+.follow-us-content h2 {
+    font-size: 4rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    margin-bottom: 0;
+    /* Removed margin */
+}
+
+.follow-us-content p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #D3D3D3;
+    margin-bottom: 0.5rem;
+    /* Significantly reduced margin */
+}
+
+.social-icons {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+}
+
+.social-icon {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    text-decoration: none;
+}
+
+.social-icon:hover {
+    background-color: rgba(255, 255, 255, 0.9);
+    transform: translateY(-5px);
+}
+
+.social-icon svg {
+    width: 26px;
+    height: 26px;
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+.footer-map {
+    width: 100%;
+    display: flex;
+}
+
+.site-footer {
+    background-color: #121212;
+    padding: 2.5rem 2rem 1rem 2rem;
+    color: #F5F5F5;
+    display: flex;
+    justify-content: center;
+    border-top: 1px solid #D3D3D3;
+}
+
+.footer-container {
+    max-width: 1200px;
+    width: 100%;
+}
+
+.footer-header {
+    margin-bottom: 2rem;
+}
+
+.footer-header h2 {
+    font-size: 3rem;
+    font-weight: 300;
+    letter-spacing: 2px;
+}
+
+.footer-header h2 .text-grey {
+    color: #D3D3D3;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
+    gap: 2.5rem;
+    margin-bottom: 1.75rem;
+}
+
+.footer-column h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.footer-column ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.footer-column ul li a,
+.footer-column p,
+.footer-column p a {
+    color: #D3D3D3;
+    text-decoration: none;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    transition: color 0.3s ease;
+}
+
+.footer-column ul li a:hover,
+.footer-column p a:hover {
+    color: #F5F5F5;
+}
+
+.footer-logo {
+    height: 25px;
+    width: auto;
+    margin-bottom: 1rem;
+    filter: brightness(0) invert(1);
+    opacity: 0.9;
+}
+
+.made-in-india {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+}
+
+.india-flag {
+    width: 40px;
+    height: auto;
+    border-radius: 2px;
+}
+
+.made-in-india span {
+    font-size: 0.8rem;
+    line-height: 1.2;
+    color: #D3D3D3;
+}
+
+.made-in-india strong {
+    font-size: 1rem;
+    font-weight: 800;
+    color: #F5F5F5;
+}
+
+.footer-social-icons {
+    display: flex;
+    gap: 1rem;
+}
+
+.footer-social-icons a {
+    color: #F5F5F5;
+    transition: color 0.3s ease;
+}
+
+.footer-social-icons a:hover {
+    color: #D3D3D3;
+}
+
+.footer-social-icons svg {
+    width: 20px;
+    height: 20px;
+}
+
+.contacts-column li {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    color: #D3D3D3;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.contacts-column li svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    margin-top: 0.2rem;
+    color: #F5F5F5;
+}
+
+.contacts-column li a {
+    color: #D3D3D3;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.contacts-column li a:hover {
+    color: #F5F5F5;
+}
+
+.footer-bottom-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1.5rem;
+    border-top: 1px solid #D3D3D3;
+    color: #D3D3D3;
+    font-size: 0.85rem;
+}
+
+.footer-bottom-bar strong {
+    color: #F5F5F5;
+    font-weight: 600;
+}
+
+.scroll-top-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 36px;
+    height: 36px;
+    background-color: #D3D3D3;
+    color: #F5F5F5;
+    border-radius: 2px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.scroll-top-btn:hover {
+    background-color: #D3D3D3;
+}
+
+.scroll-top-btn svg {
+    width: 18px;
+    height: 18px;
+}
+
+/* ==========================================================================
+   Art of the Gun Section
+   ========================================================================== */
+.art-of-the-gun {
+    position: relative;
+    width: 100%;
+    min-height: 80vh;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    padding: 3rem 4rem;
+    background-image: url('../assets/images/1.webp');
+    /* Try 1.webp */
+    background-size: cover;
+    background-position: center;
+}
+
+.art-of-the-gun-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.1) 100%);
+    z-index: 1;
+}
+
+.art-of-the-gun-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 800px;
+}
+
+.art-box {
+    background-color: #9c8a77;
+    /* Tan color from screenshot */
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    align-self: flex-start;
+}
+
+.art-box h2 {
+    color: #F5F5F5;
+    font-size: 2.2rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    margin: 0;
+}
+
+.art-of-the-gun-content p {
+    color: #F5F5F5;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    letter-spacing: 0.5px;
+    font-weight: 400;
+}
+
+/* ==========================================================================
+   Features Grid Section
+   ========================================================================== */
+.features-grid-section {
+    padding: 0.8rem 1.5rem 2.5rem 1.5rem;
+    background-color: #ebebeb;
+    display: flex;
+    justify-content: center;
+}
+
+.features-grid-container {
+    max-width: 1350px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.features-row-top {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.feature-box {
+    position: relative;
+    overflow: hidden;
+    height: 380px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 2.2rem 2.2rem 1.8rem 2.2rem;
+    border-radius: 0px;
+}
+
+.feature-box-full {
+    height: 360px;
+}
+
+.feature-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    z-index: 1;
+    transition: transform 0.6s ease;
+}
+
+.feature-box:hover .feature-bg {
+    transform: scale(1.04);
+}
+
+.feature-box::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 75%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.45) 45%, rgba(0, 0, 0, 0) 100%);
+    z-index: 2;
+}
+
+.feature-content {
+    position: relative;
+    z-index: 3;
+    color: #ffffff;
+}
+
+.feature-content h3 {
+    font-size: 1.75rem;
+    font-weight: 800;
+    letter-spacing: 0.2px;
+    margin-bottom: 0.35rem;
+    text-transform: uppercase;
+    color: #ffffff;
+    line-height: 1.15;
+}
+
+.feature-content p {
+    font-size: 0.95rem;
+    line-height: 1.35;
+    color: rgba(255, 255, 255, 0.88);
+    margin-bottom: 0.6rem;
+    max-width: 90%;
+    font-weight: 400;
+}
+
+.feature-link {
+    color: #ffffff;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-thickness: 1.5px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    display: inline-block;
+    transition: opacity 0.3s ease;
+}
+
+.feature-link:hover {
+    opacity: 0.8;
+}
+
+@media (max-width: 900px) {
+    .features-row-top {
+        grid-template-columns: 1fr;
+    }
+
+    .feature-box {
+        height: auto;
+        min-height: 300px;
+    }
+
+    .feature-box-full {
+        height: auto;
+        min-height: 300px;
+    }
+}
+
+/* ==========================================================================
+   Weapons Banner Section
+   ========================================================================== */
+.weapons-banner-section {
+    background-color: #e6e6e6;
+    /* Light textured look */
+    padding: 3rem 2rem;
+    text-align: center;
+    border-top: 1px solid #D3D3D3;
+    border-bottom: 1px solid #D3D3D3;
+}
+
+.weapons-banner-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.weapons-banner-img {
+    max-width: 85%;
+    height: auto;
+    filter: drop-shadow(0 30px 20px rgba(0, 0, 0, 0.25));
+    transition: transform 0.5s ease;
+}
+
+.weapons-banner-img:hover {
+    transform: translateY(-5px) scale(1.02);
+}
+
+.weapons-banner-link {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    color: #1f1f1f;
+    text-decoration: none;
+    padding-bottom: 0.3rem;
+    font-weight: 300;
+    letter-spacing: 2px;
+    transition: color 0.3s ease;
+}
+
+.weapons-banner-link:hover {
+    color: #222222;
+}
+
+/* ==========================================================================
+   Sniper Details Section
+   ========================================================================== */
+.sniper-details-section {
+    background-color: #e5e5e5;
+    padding: 3.5rem 2rem;
+}
+
+.sniper-spotlight-container {
+    max-width: 1250px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 4rem;
+}
+
+.spotlight-left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right;
+}
+
+.spotlight-left h2 {
+    font-size: 1.3rem;
+    font-weight: 300;
+    color: #121212;
+    margin-bottom: 0;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.spotlight-left h2 strong {
+    font-weight: 500;
+}
+
+.spotlight-subtitle {
+    font-size: 1rem;
+    color: #121212;
+    margin-top: 0.1rem;
+    margin-bottom: 0.1rem;
+}
+
+.spotlight-badge {
+    background-color: #D3D3D3;
+    color: #121212;
+    padding: 0.15rem 0.4rem;
+    font-size: 0.8rem;
+    font-weight: 800;
+    display: inline-block;
+    margin-bottom: 1.2rem;
+    /* Reduced gap to move button up */
+}
+
+.spotlight-btn {
+    display: inline-block;
+    background-color: #999999;
+    /* Darker grey to match image */
+    color: #ffffff;
+    /* White text to match image */
+    border: none;
+    /* Removed border */
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.8rem;
+    /* Made font smaller */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 0.25rem 1rem;
+    /* Reduced padding to make button smaller */
+    border-radius: 0;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.spotlight-btn:hover {
+    background-color: #121212;
+    color: #D3D3D3;
+    border-color: #D3D3D3;
+}
+
+.spotlight-center {
+    flex: 1.2;
+    text-align: center;
+}
+
+.spotlight-img {
+    max-width: 100%;
+    height: auto;
+    filter: drop-shadow(0 35px 25px rgba(0, 0, 0, 0.2));
+}
+
+.spotlight-right {
+    flex: 1;
+    text-align: left;
+}
+
+.spotlight-desc {
+    color: #121212;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 0.5rem;
+}
+
+.spotlight-features {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.spotlight-features li {
+    font-size: 0.78rem;
+    color: #666666;
+    margin-bottom: 0.35rem;
+    display: flex;
+    align-items: center;
+}
+
+.spotlight-features li span {
+    color: #666666;
+    font-weight: 800;
+    margin-right: 0.5rem;
+}
+
+@media (max-width: 900px) {
+    .sniper-spotlight-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 2.5rem;
+    }
+
+    .spotlight-left {
+        align-items: center;
+        text-align: center;
+    }
+
+    .spotlight-right {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        width: 100%;
+    }
+
+    .spotlight-desc {
+        text-align: center;
+        margin: 0 auto 1.2rem auto;
+        max-width: 320px;
+    }
+
+    .spotlight-features {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        text-align: left !important;
+        width: 100% !important;
+        max-width: 320px !important;
+        margin: 0 auto !important;
+        padding: 0 !important;
+    }
+
+    .spotlight-features li {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        text-align: left !important;
+        width: 100% !important;
+        margin-bottom: 0.45rem !important;
+        white-space: nowrap !important;
+    }
+
+    .spotlight-features li span {
+        display: inline-block !important;
+        min-width: 16px !important;
+        width: 16px !important;
+        text-align: left !important;
+        margin-right: 8px !important;
+        font-weight: 800 !important;
+        color: #666666 !important;
+        flex-shrink: 0 !important;
+    }
+
+    /* Parallax & Gun Background Fix on Mobile */
+    .parallax-section {
+        height: auto !important;
+        min-height: 480px !important;
+        padding: 3.5rem 1.5rem 2.5rem 1.5rem !important;
+        display: flex !important;
+        align-items: flex-end !important;
+        justify-content: center !important;
+        position: relative !important;
+        overflow: hidden !important;
+    }
+
+    .parallax-bg-fixed {
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        background-size: cover !important;
+        background-position: 40% 30% !important;
+        background-attachment: scroll !important;
+        transform: none !important;
+    }
+
+    .parallax-section.align-left .parallax-bg-fixed {
+        background-position: 42% 45% !important;
+    }
+
+    .parallax-overlay {
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.35) 55%, rgba(0, 0, 0, 0.15) 100%) !important;
+    }
+
+    .parallax-content {
+        width: 100% !important;
+        padding: 0 !important;
+        display: flex !important;
+        justify-content: center !important;
+    }
+
+    .parallax-text-container {
+        align-items: center !important;
+        text-align: center !important;
+        margin: 0 auto !important;
+        width: 100% !important;
+    }
+
+    .parallax-text-container h2 {
+        font-size: clamp(1.4rem, 4.5vw, 1.85rem) !important;
+        white-space: normal !important;
+        text-align: center !important;
+        line-height: 1.2 !important;
+    }
+
+    .parallax-subtitle {
+        font-size: 0.82rem !important;
+        text-align: center !important;
+    }
+
+    .parallax-badge {
+        font-size: 0.7rem !important;
+        white-space: normal !important;
+        text-align: center !important;
+        line-height: 1.35 !important;
+        margin-bottom: 1rem !important;
+    }
+
+    .parallax-btn {
+        align-self: center !important;
+    }
+}
+
+/* ==========================================================================
+   Hero Video Background
+   ========================================================================== */
+.hero-bg-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: 0;
+    transform: translateX(-50%) translateY(-50%);
+    object-fit: cover;
+}
+
+.hero {
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+/* ==========================================================================
+   Global Mobile Responsiveness
+   ========================================================================== */
+@media (max-width: 768px) {
+
+    /* General */
+    body,
+    html {
+        overflow-x: hidden;
+    }
+
+    /* Hero */
+    .hero-content {
+        left: 1.5rem;
+        bottom: 2rem;
+        padding: 0;
+    }
+
+    .hero-content h1 {
+        font-size: 2.2rem;
+    }
+
+    .hero-content .subtitle {
+        font-size: 0.95rem;
+        padding: 0;
+        white-space: normal;
+    }
+
+    /* Vertical Rifle Section (+ Points Left-Aligned in Clean Column) */
+    .vertical-rifle-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 2rem;
+    }
+
+    .vertical-rifle-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        width: 100%;
+    }
+
+    .vertical-rifle-specs-container {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        text-align: left !important;
+        width: 100% !important;
+        max-width: 320px !important;
+        margin: 0 auto !important;
+        padding: 0 !important;
+        gap: 1.2rem !important;
+    }
+
+    .vertical-rifle-specs {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        text-align: left !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        list-style: none !important;
+    }
+
+    .vertical-rifle-specs li {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        text-align: left !important;
+        width: 100% !important;
+        font-size: 0.75rem !important;
+        margin-bottom: 0.35rem !important;
+        padding: 0 !important;
+        white-space: nowrap !important;
+    }
+
+    .vertical-rifle-specs li .red-plus {
+        display: inline-block !important;
+        min-width: 16px !important;
+        width: 16px !important;
+        text-align: left !important;
+        margin-right: 6px !important;
+        font-weight: 900 !important;
+        flex-shrink: 0 !important;
+    }
+
+    /* Catalog Grid */
+    .catalog-grid-container {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+    }
+
+    .catalog-card {
+        aspect-ratio: 16/9;
+    }
+
+    .catalog-card-content {
+        padding: 1rem;
+    }
+
+    .catalog-card-content h3 {
+        font-size: 1rem;
+        white-space: normal;
+    }
+
+    .catalog-card-content p {
+        font-size: 0.68rem;
+    }
+
+    .catalog-card-badge {
+        font-size: 0.6rem;
+        padding: 0.15rem 0.45rem;
+        margin-bottom: 0.4rem;
+    }
+
+    .catalog-card-btn {
+        font-size: 0.7rem;
+        padding: 0.35rem 0.85rem;
+    }
+
+    .catalog-text-block {
+        padding: 0.5rem 0 0 0;
+    }
+
+    .catalog-text-block h2 {
+        font-size: 2rem !important;
+        margin-top: 0;
+        margin-bottom: 0.8rem;
+        line-height: 1.1;
+    }
+
+    .catalog-text-block p {
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+
+    .weapons-banner-link {
+        font-size: 1.8rem;
+    }
+
+    /* About & History */
+    .about-row,
+    .history-row {
+        grid-template-columns: 1fr;
+        display: flex;
+        flex-direction: column !important;
+        gap: 2rem;
+    }
+
+    .about-details-image,
+    .about-details-text,
+    .history-image,
+    .history-text {
+        width: 100%;
+        padding: 1rem;
+    }
+
+    /* Brands */
+    .brand-logos-container {
+        flex-direction: column;
+        gap: 2.5rem;
+    }
+
+    /* Footer */
+    .site-footer {
+        padding: 3rem 1.5rem 1rem 1.5rem;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        text-align: center;
+    }
+
+    .footer-logo {
+        margin: 0 auto 1.5rem auto;
+    }
+
+    .made-in-india {
+        justify-content: center;
+    }
+
+    .footer-social-icons {
+        justify-content: center;
+    }
+
+    .contacts-column li {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+        text-align: center;
+    }
+
+    .footer-bottom-bar {
+        flex-direction: column;
+        gap: 1.5rem;
+        text-align: center;
+    }
+
+    /* Features Grid additions */
+    .feature-box {
+        padding: 1.5rem;
+    }
+
+    .feature-content h3 {
+        font-size: 1.4rem;
+    }
+}
+
+/* ==========================================================================
+   Responsive Media Queries (Mobile & Tablet)
+   ========================================================================== */
+
+/* Hide mobile toggle on desktop */
+.mobile-menu-toggle {
+    display: none;
+}
+
+/* Tablet (1024px and below) */
+@media (max-width: 1024px) {
+    .nav-links {
+        gap: 1rem;
+    }
+
+    .header-logo-img {
+        max-height: 40px;
+    }
+
+    .hero h1 {
+        font-size: 3.5rem;
+    }
+
+    .hero p {
+        max-width: 80%;
+    }
+
+    .product-grid,
+    .categories-grid,
+    .weapons-grid-all {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+    }
+}
+
+/* Mobile Devices (768px and below) */
+@media (max-width: 768px) {
+
+    /* Header & Navigation */
+    .mobile-menu-toggle {
+        display: block;
+        background: none;
+        border: none;
+        padding: 10px;
+        cursor: pointer;
+        z-index: 100;
+    }
+
+    .hamburger {
+        display: block;
+        width: 25px;
+        height: 3px;
+        background-color: #fff;
+        position: relative;
+    }
+
+    .hamburger::before,
+    .hamburger::after {
+        content: '';
+        position: absolute;
+        width: 25px;
+        height: 3px;
+        background-color: #fff;
+        left: 0;
+    }
+
+    .hamburger::before {
+        top: -8px;
+    }
+
+    .hamburger::after {
+        top: 8px;
+    }
+
+    .desktop-nav {
+        position: fixed;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        background-color: rgba(10, 10, 10, 0.95);
+        padding: 2rem 1rem;
+        flex-direction: column;
+        display: none;
+        z-index: 99;
+    }
+
+    body.menu-open .desktop-nav {
+        display: flex;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+    /* Hero */
+    .hero h1 {
+        font-size: 2.5rem;
+        letter-spacing: 2px;
+    }
+
+    .hero h2 {
+        font-size: 1rem;
+        letter-spacing: 4px;
+    }
+
+    /* Grids */
+    .product-grid,
+    .categories-grid,
+    .weapons-grid-all {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* Parallax Section */
+    .parallax-section {
+        min-height: 50vh;
+        height: auto;
+        padding: 4rem 0;
+        align-items: center;
+        justify-content: flex-end;
+    }
+
+    .parallax-content {
+        padding: 0 1.5rem;
+        justify-content: flex-end;
+        width: 100%;
+    }
+
+    .parallax-text-container {
+        align-items: flex-end;
+        text-align: right;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .parallax-text-container h2 {
+        white-space: normal;
+        font-size: 1.5rem;
+        line-height: 1.25;
+        text-align: right;
+    }
+
+    .parallax-subtitle {
+        font-size: 0.82rem;
+        text-align: right;
+        margin-bottom: 0.5rem;
+    }
+
+    .parallax-badge {
+        white-space: normal;
+        line-height: 1.4;
+        text-align: right;
+        font-size: 0.65rem;
+        padding: 0.25rem 0.5rem;
+        margin-bottom: 0.5rem;
+        display: inline-block;
+    }
+
+    .parallax-btn {
+        font-size: 0.75rem;
+        padding: 0.4rem 1.2rem;
+        align-self: flex-end;
+    }
+
+    /* Feature Highlights */
+    .highlight-features {
+        flex-direction: column;
+    }
+
+    .highlight-card {
+        width: 100%;
+    }
+
+    /* About Section */
+    .brand-logo-set {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 2.5rem 1.5rem;
+    }
+
+    .brand-logo {
+        transform: scale(0.85);
+    }
+
+    .about-content h2 {
+        font-size: 2.2rem;
+    }
+
+    .mountains-background {
+        min-height: 35vh;
+    }
+
+    /* H6 / DSR-1 Spotlight */
+    .h6-spotlight {
+        padding: 1rem 1.2rem;
+    }
+
+    .h6-spotlight-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .h6-content-right {
+        padding-left: 0;
+        text-align: left;
+        align-items: flex-start;
+    }
+
+    .h6-content-right h2 {
+        font-size: 2.2rem;
+        margin-bottom: 0.6rem;
+    }
+
+    .h6-content-right p {
+        font-size: 0.95rem;
+        margin-bottom: 1.2rem;
+    }
+
+    /* Footer */
+    .footer-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .footer-column ul {
+        align-items: center;
+    }
+}
+
+/* ==========================================================================
+   DSR-1 Product Page & Interactive Technical Diagram (Image 2 Reference)
+   ========================================================================== */
+.dsr-manufacturer-section {
+    background-color: #FFFFFF !important;
+    padding: 2.25rem 1.5rem 1.5rem 1.5rem;
+    text-align: center;
+    color: #0D0D0D;
+    border-bottom: 1px solid #E5E5E5;
+}
+
+.dsr-section-heading {
+    font-family: var(--font-body, 'Montserrat', sans-serif) !important;
+    font-size: clamp(2rem, 3.2vw, 2.75rem);
+    font-weight: 800;
+    color: #000000;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.75rem;
+    line-height: 1.2;
+}
+
+.dsr-section-subtitle {
+    font-family: var(--font-body, 'Montserrat', sans-serif);
+    font-size: clamp(0.95rem, 1.1vw, 1.05rem);
+    line-height: 1.65;
+    color: #333333;
+    max-width: 950px;
+    margin: 0 auto 1.25rem auto;
+    font-weight: 400;
+}
+
+@media (max-width: 768px) {
+    .dsr-manufacturer-section {
+        padding: 1.5rem 1rem 1rem 1rem;
+    }
+
+    .dsr-section-heading {
+        font-size: clamp(1.35rem, 5.5vw, 1.85rem);
+        margin-bottom: 0.5rem;
+    }
+
+    .dsr-section-subtitle {
+        font-size: 0.9rem;
+        line-height: 1.55;
+        padding: 0 0.25rem;
+    }
+}
+
+.dsr-tech-diagram-container {
+    position: relative;
+    width: 100%;
+    max-width: 1250px;
+    margin: 0 auto 0.5rem auto;
+    background: #FFFFFF;
+    user-select: none;
+    overflow: hidden;
+}
+
+.dsr-tech-svg-layer {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Callout groups and pointer lines (Hidden by default, reveal on dot click) */
+.tech-callout-item {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    pointer-events: none;
+}
+
+.tech-callout-item.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.tech-pointer-line {
+    stroke: #222222;
+    stroke-width: 1.2;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    opacity: 0;
+    transition: opacity 0.35s ease, stroke 0.2s ease, stroke-width 0.2s ease;
+}
+
+.tech-pointer-line.active {
+    opacity: 1;
+}
+
+.tech-badge {
+    fill: #000000;
+    transition: fill 0.2s ease;
+}
+
+.tech-callout-item:hover .tech-badge {
+    fill: #222222;
+}
+
+.tech-badge-text {
+    font-family: var(--font-body, 'Montserrat', sans-serif);
+    font-weight: 700;
+    font-size: 8.5px;
+    fill: #FFFFFF;
+    letter-spacing: 0.2px;
+}
+
+.tech-desc-text {
+    font-family: var(--font-body, 'Montserrat', sans-serif);
+    font-weight: 400;
+    font-size: 7.5px;
+    fill: #555555;
+    line-height: 1.35;
+}
+
+/* DSR-1 & VIPER Diagram Specific Fine-Tuned Typography & Hover Reveal */
+#dsr-diagram-container .tech-callout-item,
+#viper-diagram-container .tech-callout-item {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: auto;
+}
+
+#dsr-diagram-container .tech-pointer-line,
+#viper-diagram-container .tech-pointer-line {
+    opacity: 0;
+    stroke: #333333;
+    stroke-width: 1.25;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#dsr-diagram-container .tech-callout-item.active,
+#dsr-diagram-container .tech-callout-item.hovered,
+#viper-diagram-container .tech-callout-item.active,
+#viper-diagram-container .tech-callout-item.hovered {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+#dsr-diagram-container .tech-pointer-line.active,
+#dsr-diagram-container .tech-pointer-line.hovered,
+#viper-diagram-container .tech-pointer-line.active,
+#viper-diagram-container .tech-pointer-line.hovered {
+    opacity: 1 !important;
+}
+
+#dsr-diagram-container .tech-dot-group,
+#viper-diagram-container .tech-dot-group {
+    display: block !important;
+    cursor: pointer;
+}
+
+#viper-diagram-container .tech-badge-text {
+    font-size: 9.5px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+}
+
+#viper-diagram-container .tech-desc-text {
+    font-size: 8.5px;
+    font-weight: 400;
+    fill: #444444;
+    letter-spacing: 0.2px;
+}
+
+/* Dots on Gun — Interactive & Clickable with Hover Feedback */
+.tech-dot-group {
+    cursor: pointer;
+}
+
+/* Outer ring of dot */
+.tech-dot-outer {
+    r: 8.5;
+    fill: #ffffff;
+    stroke: #111111;
+    stroke-width: 2.2;
+    transition: fill 0.2s ease, stroke 0.2s ease, r 0.2s ease;
+}
+
+/* Inner filled dot */
+.tech-dot-inner {
+    r: 4;
+    fill: #111111;
+    stroke: #111111;
+    stroke-width: 1.5;
+    transition: fill 0.2s ease, stroke 0.2s ease, r 0.2s ease;
+}
+
+.tech-dot-group:hover .tech-dot-outer,
+.tech-dot-group.active .tech-dot-outer,
+.tech-dot-group.hovered .tech-dot-outer {
+    fill: #111111;
+    stroke: #111111;
+    r: 10;
+}
+
+.tech-dot-group:hover .tech-dot-inner,
+.tech-dot-group.active .tech-dot-inner,
+.tech-dot-group.hovered .tech-dot-inner {
+    fill: #ffffff;
+    stroke: #ffffff;
+    r: 4.5;
+}
+
+.tech-dot-group:hover .tech-dot-outer,
+.tech-dot-group.active .tech-dot-outer {
+    fill: #000000;
+    stroke: #000000;
+    r: 10;
+}
+
+.tech-dot-group:hover .tech-dot-inner,
+.tech-dot-group.active .tech-dot-inner {
+    fill: #FFFFFF;
+    stroke: #FFFFFF;
+    r: 4.5;
+}
+
+.dsr-diagram-footnote {
+    font-family: var(--font-body, 'Montserrat', sans-serif);
+    font-size: clamp(0.85rem, 1.1vw, 0.95rem);
+    color: #555555;
+    font-style: normal;
+    margin: 0.75rem auto 1.75rem auto;
+}
+
+/* ==========================================================================
+   DSR-1 Photo Gallery Grid
+   ========================================================================== */
+.dsr-photo-gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 2rem;
+    background: #e8e8e8;
+}
+
+/* Full-width image row */
+.dsr-gallery-full {
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+}
+
+.dsr-gallery-full img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.dsr-gallery-full:hover img {
+    transform: scale(1.02);
+}
+
+/* Mosaic Grid Layout:
+   Col1  Col2  Col3(scope-tall)
+   [TL ] [TC ] [             ]
+   [BW     2col] [             ]
+*/
+.dsr-gallery-mosaic {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 260px 260px;
+    gap: 6px;
+}
+
+/* Top-left cell: col 1, row 1 */
+.dsr-mosaic-top-left {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+/* Top-center cell: col 2, row 1 */
+.dsr-mosaic-top-center {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+/* Scope: col 3, spans both rows (tall) */
+.dsr-mosaic-right-tall {
+    grid-column: 3;
+    grid-row: 1 / 3;
+}
+
+/* Bottom-wide: col 1-2, row 2 (narrower than full width) */
+.dsr-mosaic-bottom-wide {
+    grid-column: 1 / 3;
+    grid-row: 2;
+}
+
+.dsr-mosaic-cell {
+    overflow: hidden;
+    line-height: 0;
+}
+
+.dsr-mosaic-cell img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.dsr-mosaic-cell:hover img {
+    transform: scale(1.03);
+}
+
+/* Mosaic Responsive on Tablets & Mobile */
+@media (max-width: 768px) {
+    .dsr-gallery-full img {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+        display: block;
+    }
+
+    .dsr-gallery-mosaic {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+        gap: 6px;
+    }
+
+    .dsr-mosaic-top-left {
+        grid-column: 1;
+        grid-row: 1;
+        height: 180px;
+    }
+
+    .dsr-mosaic-top-center {
+        grid-column: 2;
+        grid-row: 1;
+        height: 180px;
+    }
+
+    .dsr-mosaic-bottom-wide {
+        grid-column: 1 / 3;
+        grid-row: 2;
+        height: auto;
+        max-height: 240px;
+    }
+
+    .dsr-mosaic-bottom-wide img {
+        width: 100%;
+        height: auto;
+        max-height: 240px;
+        object-fit: cover;
+    }
+
+    .dsr-mosaic-right-tall {
+        grid-column: 1 / 3;
+        grid-row: 3;
+        height: auto;
+        max-height: 260px;
+    }
+
+    .dsr-mosaic-right-tall img {
+        width: 100%;
+        height: auto;
+        max-height: 260px;
+        object-fit: cover;
+    }
+
+    .dsr-mosaic-cell {
+        width: 100%;
+        height: auto;
+        overflow: hidden;
+    }
+}
+
+@media (max-width: 480px) {
+    .dsr-gallery-full img {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+        display: block;
+    }
+
+    .dsr-mosaic-top-left,
+    .dsr-mosaic-top-center {
+        height: 140px;
+    }
+
+    .dsr-mosaic-bottom-wide {
+        height: auto;
+        max-height: 200px;
+    }
+
+    .dsr-mosaic-right-tall {
+        height: auto;
+        max-height: 220px;
+    }
+}
+
+/* 3-column equal row (kept for reference) */
+.dsr-gallery-three {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 260px;
+    gap: 6px;
+}
+
+.dsr-gallery-cell {
+    overflow: hidden;
+    height: 260px;
+    line-height: 0;
+}
+
+.dsr-gallery-cell img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.dsr-gallery-cell:hover img {
+    transform: scale(1.04);
+}
+
+/* ==========================================================================
+   Follow Us Banner (High-Resolution & Crisp Vector Typography)
+   ========================================================================== */
+.dsr-followus-banner {
+    position: relative;
+    width: 100%;
+    min-height: 230px;
+    background-color: #050505;
+    background-image: url('../assets/images/followus-bg.webp');
+    background-size: cover;
+    background-position: right center;
+    background-repeat: no-repeat;
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+
+.dsr-followus-banner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 48%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(5, 5, 5, 0.95) 0%, rgba(5, 5, 5, 0.8) 60%, rgba(5, 5, 5, 0) 100%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.dsr-followus-inner {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    padding: 2.25rem 3rem;
+    display: flex;
+    align-items: center;
+}
+
+.dsr-followus-content {
+    max-width: 480px;
+    text-align: left;
+}
+
+.dsr-followus-title {
+    font-family: var(--font-body, 'Montserrat', sans-serif) !important;
+    font-size: clamp(1.2rem, 1.8vw, 1.5rem);
+    font-weight: 800;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 0 0 0.4rem 0;
+    line-height: 1.2;
+}
+
+.dsr-followus-desc {
+    font-family: var(--font-body, 'Montserrat', sans-serif);
+    font-size: clamp(0.85rem, 1vw, 0.95rem);
+    color: #D1D1D1;
+    line-height: 1.45;
+    margin: 0 0 1rem 0;
+    font-weight: 400;
+}
+
+.dsr-followus-socials {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+.dsr-social-circle-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    background-color: #FFFFFF;
+    color: #000000;
+    border-radius: 50%;
+    text-decoration: none;
+    transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.dsr-social-circle-btn svg {
+    width: 20px;
+    height: 20px;
+    fill: #000000;
+    transition: fill 0.2s ease;
+}
+
+.dsr-social-circle-btn:hover {
+    transform: translateY(-2px) scale(1.08);
+    background-color: #ECECEC;
+}
+
+@media (max-width: 768px) {
+    .dsr-followus-banner {
+        min-height: auto;
+    }
+
+    .dsr-followus-inner {
+        padding: 1.75rem 1.5rem;
+    }
+
+    .dsr-followus-banner::before {
+        width: 100%;
+        background: rgba(5, 5, 5, 0.88);
+    }
+}
+
+.dsr-diagram-wrapper {
+    position: relative;
+    user-select: none;
+}
+
+.dsr-hotspot {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    z-index: 15;
+}
+
+.hotspot-dot {
+    display: block;
+    width: 14px;
+    height: 14px;
+    background-color: #FFFFFF;
+    border: 2px solid #0D0D0D;
+    border-radius: 50%;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+    transition: transform 0.25s ease, background-color 0.25s ease;
+}
+
+.hotspot-pulse {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 28px;
+    height: 28px;
+    border: 2px solid #FFFFFF;
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0.5);
+    opacity: 0.8;
+    animation: hotspotPulse 2s infinite ease-out;
+    pointer-events: none;
+}
+
+@keyframes hotspotPulse {
+    0% {
+        transform: translate(-50%, -50%) scale(0.4);
+        opacity: 0.9;
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(1.6);
+        opacity: 0;
+    }
+}
+
+.dsr-hotspot:hover .hotspot-dot {
+    background-color: #C0C0C0;
+    transform: scale(1.3);
+}
+
+.hotspot-tooltip {
+    position: absolute;
+    bottom: 130%;
+    left: 50%;
+    transform: translateX(-50%) translateY(8px);
+    width: 220px;
+    background-color: #0D0D0D;
+    color: #F5F5F5;
+    padding: 0.85rem 1rem;
+    border-radius: 6px;
+    border: 1px solid #C0C0C0;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+    pointer-events: none;
+    z-index: 30;
+    text-align: left;
+}
+
+.hotspot-tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 6px;
+    border-style: solid;
+    border-color: #0D0D0D transparent transparent transparent;
+}
+
+.dsr-hotspot:hover .hotspot-tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+.hotspot-tooltip h4 {
+    font-family: var(--font-body, 'Montserrat', sans-serif);
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #C0C0C0;
+    margin: 0 0 0.3rem 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.hotspot-tooltip p {
+    font-family: var(--font-body, 'Montserrat', sans-serif);
+    font-size: 0.78rem;
+    line-height: 1.4;
+    color: #F5F5F5;
+    margin: 0;
+}
+
+
+
+.dsr-gallery-item:hover img {
+    transform: scale(1.08);
+}
+
+/* Full-width grey background wrapper for pillars */
+.dsr-pillars-fullwidth {
+    width: 100%;
+    background: #EFEFEF;
+    padding: 0;
+    margin: 0;
+}
+
+/* ==========================================================================
+   Tactical Pillar Cards (Model, Design, Engineering) - Full-Width Gray Section
+   ========================================================================== */
+.dsr-pillars-fullwidth,
+.dsr-pillars-fullwidth-wrap {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    background-color: #F4F4F4;
+    padding: 3.5rem 1.5rem;
+    margin-top: 1rem;
+    margin-bottom: 2.5rem;
+    box-sizing: border-box;
+}
+
+.dsr-pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0;
+    background: transparent !important;
+}
+
+.dsr-pillar-card {
+    background: transparent !important;
+    border: none !important;
+    padding: 1.5rem 1rem !important;
+    border-radius: 0 !important;
+    text-align: center !important;
+    position: relative !important;
+    box-shadow: none !important;
+    transition: none !important;
+}
+
+/* No vertical borders between cards */
+.dsr-pillar-card+.dsr-pillar-card {
+    border-left: none !important;
+}
+
+.dsr-pillar-card:hover {
+    transform: none !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* No watermark number in Image 1 style */
+.pillar-watermark {
+    display: none !important;
+}
+
+/* Soft gray outlined icon */
+.pillar-icon-badge {
+    width: 68px;
+    height: 68px;
+    background-color: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.25rem auto;
+    color: #9E9E9E;
+    box-shadow: none !important;
+    transition: none !important;
+}
+
+.dsr-pillar-card:hover .pillar-icon-badge {
+    transform: none !important;
+    background-color: transparent !important;
+    border-color: transparent !important;
+}
+
+.pillar-icon-badge svg {
+    width: 64px;
+    height: 64px;
+}
+
+.pillar-icon-badge img,
+.pillar-icon-img {
+    width: 52px;
+    height: 52px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    filter: brightness(0.25);
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.dsr-pillar-card:hover .pillar-icon-img {
+    transform: scale(1.08);
+    filter: brightness(0);
+}
+
+/* Category label — no // prefix, bold dark */
+.pillar-tag {
+    font-family: var(--font-body, 'Montserrat', sans-serif);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: #333333;
+    margin-bottom: 0.35rem;
+    text-transform: uppercase;
+}
+
+.pillar-title {
+    font-family: var(--font-body, 'Montserrat', sans-serif);
+    font-size: 1.65rem;
+    font-weight: 800;
+    color: #000000;
+    margin: 0 0 0.85rem 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.pillar-desc {
+    font-family: var(--font-body, 'Montserrat', sans-serif);
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: #555555;
+    margin: 0 auto;
+    max-width: 320px;
+}
+
+/* Responsive Pillars for Tablet & Mobile */
+@media (max-width: 768px) {
+
+    .dsr-pillars-fullwidth,
+    .dsr-pillars-fullwidth-wrap {
+        width: 100vw;
+        position: relative;
+        left: 50%;
+        right: 50%;
+        margin-left: -50vw;
+        margin-right: -50vw;
+        padding: 2.5rem 1rem;
+        box-sizing: border-box;
+    }
+
+    .dsr-pillars-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 0 1rem;
+    }
+
+    .dsr-pillar-card {
+        padding: 0.75rem 0.5rem !important;
+    }
+
+    .pillar-title {
+        font-size: 1.45rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .pillar-desc {
+        max-width: 100%;
+        font-size: 0.9rem;
+    }
+}
+
+/* Contact Page Styles */
+.contact-hero-banner {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    background-image: url('../assets/images/weapon-ar10.webp');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #0D0D0D;
+    padding-top: 80px;
+    /* Account for header */
+}
+
+.contact-hero-banner::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.contact-hero-title {
+    position: relative;
+    z-index: 2;
+    color: #FFFFFF;
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.contact-main-wrapper {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 3rem;
+}
+
+@media (max-width: 992px) {
+    .contact-main-wrapper {
+        grid-template-columns: 1fr;
+    }
+}
+
+.contact-info-block {
+    margin-bottom: 2rem;
+}
+
+.contact-info-block h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #0D0D0D;
+}
+
+.contact-info-block p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: #333333;
+    margin: 0;
+}
+
+.contact-form-container {
+    background-color: #EEEEEE;
+    padding: 2.5rem;
+    border-radius: 4px;
+}
+
+.contact-form-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: #0D0D0D;
+}
+
+.contact-input-group {
+    margin-bottom: 1rem;
+}
+
+.contact-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid #CCCCCC;
+    background-color: #FFFFFF;
+    font-family: inherit;
+    font-size: 0.95rem;
+    border-radius: 2px;
+}
+
+.contact-input:focus {
+    outline: none;
+    border-color: #0D0D0D;
+}
+
+textarea.contact-input {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.contact-checkbox-group {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.85rem;
+    color: #333333;
+}
+
+.contact-checkbox-group input {
+    margin-top: 0.25rem;
+}
+
+.contact-checkbox-group a {
+    color: #0D0D0D;
+    text-decoration: underline;
+}
+
+.contact-submit-btn {
+    width: 100%;
+    padding: 1rem;
+    background-color: #0D0D0D;
+    color: #FFFFFF;
+    font-weight: 700;
+    font-size: 1rem;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: background-color 0.3s;
+}
+
+.contact-submit-btn:hover {
+    background-color: #333333;
+}
+
+.mountain-footer-graphic {
+    width: 100%;
+    display: block;
+    line-height: 0;
+}
+
+.mountain-footer-graphic img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+
+/* ==========================================================================
+   GLOBAL MOBILE RESPONSIVENESS OVERRIDES (Added to fix horizontal scrolling and cutoffs)
+   ========================================================================== */
+html,
+body {
+    max-width: 100vw;
+    overflow-x: hidden;
+    /* Guarantee no horizontal scrollbar */
+}
+
+/* Ensure all images are responsive */
+img {
+    max-width: 100%;
+    height: auto;
+    flex-shrink: 0;
+    /* Prevents images from disappearing in flex containers */
+}
+
+@media (max-width: 768px) {
+
+    /* Scale down large headings that overflow */
+    h1,
+    h2,
+    .contact-hero-title {
+        font-size: 1.8rem !important;
+        word-wrap: break-word;
+        padding: 0 10px;
+    }
+
+    h3,
+    h4 {
+        font-size: 1.3rem !important;
+        word-wrap: break-word;
+    }
+
+    /* Fix inline padding on sections causing overflow */
+    section,
+    div {
+        box-sizing: border-box !important;
+    }
+
+    /* Force all inline flex rows (like in about.html and ammunition.html) to wrap or stack on mobile */
+    div[style*="display: flex"] {
+        flex-wrap: wrap !important;
+        gap: 1.5rem !important;
+        /* Reduce large gaps */
+    }
+
+    /* Fix about.html side-by-side divs that had min-width: 300px */
+    div[style*="min-width: 300px"] {
+        min-width: 100% !important;
+    }
+
+    div[style*="flex: 1 1 20%"] {
+        flex: 1 1 100% !important;
+        /* Make gallery items full width on mobile */
+    }
+
+    /* Make grid layouts single column by default if they are currently overflowing */
+    .ammo-cards-grid,
+    .dsr-gallery-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* Interactive hotspots on dsr-1 and viper: make them slightly smaller so they don't crowd */
+    .dsr-hotspot {
+        width: 18px !important;
+        height: 18px !important;
+        margin-top: -9px !important;
+        margin-left: -9px !important;
+    }
+
+    /* Fix specific section paddings */
+    .ammo-intro-section,
+    .ammo-products-section,
+    .dsr-innovation-section,
+    .dsr-manufacturer-section {
+        padding: 2rem 1rem !important;
+    }
+
+    /* ==========================================================================
+       MOBILE FOOTER OVERRIDES (Matches Screenshot Design)
+       ========================================================================== */
+    .site-footer {
+        /* Removed hardcoded background so it matches the site's dark color theme */
+        padding-top: 0;
+    }
+
+    .footer-container {
+        padding: 2rem 1rem 1rem 1rem;
+        text-align: center;
+    }
+
+    /* Target the container of Company and Policies */
+    .footer-grid {
+        display: block !important;
+        /* Switch to block to use floats */
+    }
+
+    /* Top: Logo & Socials */
+    .footer-column.brand-column {
+        display: flex;
+        flex-direction: column;
+        align-items: center !important;
+        text-align: center !important;
+        margin-bottom: 1.5rem;
+    }
+
+    .footer-logo {
+        margin: 0 auto 0.5rem auto !important;
+        max-width: 150px !important;
+        filter: brightness(0) invert(1);
+    }
+
+    .made-in-india {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: center !important;
+        margin-bottom: 1rem !important;
+        gap: 8px !important;
+    }
+
+    .footer-social-icons {
+        justify-content: center !important;
+        margin-top: 0 !important;
+    }
+
+    /* Middle: Company & Policies in 2 Columns */
+    .footer-column.links-column {
+        flex: unset !important;
+        width: 50% !important;
+        float: left;
+        margin-bottom: 1.5rem;
+    }
+
+    /* Contacts - Full width again */
+    .footer-column.contacts-column {
+        clear: both;
+        width: 100% !important;
+        margin-top: 0.5rem;
+    }
+
+    .footer-column h3 {
+        text-align: center !important;
+        font-size: 1rem !important;
+        margin-bottom: 0.75rem !important;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .footer-column ul {
+        align-items: center !important;
+        text-align: center !important;
+    }
+
+    .footer-column ul li {
+        justify-content: center !important;
+        margin-bottom: 0.5rem !important;
+        font-size: 0.85rem !important;
+    }
+
+    .footer-column.contacts-column ul li {
+        flex-direction: row !important;
+        align-items: flex-start !important;
+        text-align: center !important;
+        margin-bottom: 0.75rem !important;
+    }
+
+    .footer-column.contacts-column ul li svg {
+        margin-top: 2px;
+        margin-right: 6px;
+        width: 18px;
+        height: 18px;
+    }
+
+    .footer-column.contacts-column ul li span,
+    .footer-column.contacts-column ul li a {
+        text-align: center !important;
+        font-size: 0.85rem !important;
+    }
+
+    .footer-bottom-bar {
+        margin-top: 1rem !important;
+        border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+        padding-top: 1rem !important;
+        flex-direction: column !important;
+        gap: 0.5rem;
+        background-color: transparent !important;
+    }
+}
+
+/* ==========================================================================
+   About Us Page (PDF Exact Design Implementation)
+   ========================================================================== */
+.about-pdf-wrapper {
+    background-color: #ffffff;
+    color: #1a1a1a;
+    font-family: 'Montserrat', system-ui, -apple-system, sans-serif;
+    padding: 1.25rem 1.5rem 2rem 1.5rem;
+    position: relative;
+    z-index: 5;
+}
+
+.about-section-block {
+    max-width: 1050px;
+    margin: 0 auto 1.8rem auto;
+    text-align: center;
+}
+
+.pdf-section-title {
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #000000;
+    margin-bottom: 0.35rem;
+    margin-top: 0;
+    letter-spacing: 1px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.pdf-section-title.title-medium {
+    font-size: clamp(1.3rem, 2.8vw, 1.9rem);
+    line-height: 1.3;
+    max-width: 920px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.pdf-section-subtitle {
+    font-size: clamp(0.9rem, 1.8vw, 1.05rem);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #333333;
+    margin-bottom: 1.1rem;
+}
+
+/* 1. WHO WE ARE */
+.who-we-are-grid {
+    display: grid;
+    grid-template-columns: 1.35fr 1fr;
+    gap: 2rem;
+    align-items: center;
+    text-align: left;
+}
+
+.who-we-are-img-col .pdf-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 2px;
+    box-shadow: none;
+}
+
+.who-we-are-text-col p,
+.pdf-text-block p {
+    font-size: 1rem;
+    line-height: 1.45;
+    color: #2b2b2b;
+    margin-bottom: 0.85rem;
+}
+
+.who-we-are-text-col p:last-child,
+.pdf-text-block p:last-child {
+    margin-bottom: 0;
+}
+
+/* 2. MISSION & VISION BANNER CARDS */
+.pdf-banner-card {
+    position: relative;
+    width: 100%;
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 1.1rem;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.pdf-banner-card.vision-card {
+    margin-top: 1.8rem;
+}
+
+.pdf-card-img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.pdf-card-overlay-text {
+    position: absolute;
+    right: 5%;
+    bottom: 8%;
+    font-size: clamp(1.4rem, 3vw, 2.2rem);
+    font-weight: 700;
+    color: #ffffff;
+    text-transform: none;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.85);
+    font-family: 'Montserrat', 'Inter', sans-serif;
+    letter-spacing: 1px;
+    z-index: 5;
+    pointer-events: none;
+}
+
+.pdf-text-block {
+    text-align: center;
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+.pdf-text-block.text-center-desktop p {
+    text-align: center;
+}
+
+/* 3. SOURCE OF UNRIVALLED STRENGTH BANNER */
+.strength-banner-section {
+    max-width: 1150px;
+    margin: 0 auto 2rem auto;
+}
+
+.strength-banner-card {
+    position: relative;
+    width: 100%;
+    border-radius: 4px;
+    overflow: hidden;
+    background-color: #000000;
+    line-height: 0;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.strength-bg-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+}
+
+.strength-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.5) 45%, rgba(0, 0, 0, 0) 80%);
+    z-index: 2;
+    pointer-events: none;
+}
+
+.strength-banner-content {
+    position: absolute;
+    left: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 3;
+    max-width: 520px;
+    text-align: left;
+    color: #ffffff;
+    line-height: 1.2;
+}
+
+.strength-subhead {
+    font-size: clamp(1.1rem, 2.2vw, 1.6rem);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #ffffff;
+    margin: 0 0 0.3rem 0;
+    font-family: 'Montserrat', 'Inter', sans-serif;
+}
+
+.strength-mainhead {
+    font-size: clamp(1.3rem, 2.8vw, 2.1rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #ffffff;
+    margin: 0 0 0.75rem 0;
+    line-height: 1.15;
+    font-family: 'Montserrat', 'Inter', sans-serif;
+}
+
+.strength-desc {
+    font-size: clamp(0.85rem, 1.4vw, 1.05rem);
+    line-height: 1.4;
+    color: #d1d5db;
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+}
+
+/* RESPONSIVE BREAKPOINTS FOR ABOUT US PDF IMPLEMENTATION */
+@media (max-width: 868px) {
+    .about-pdf-wrapper {
+        padding: 0.8rem 1.25rem 2.5rem 1.25rem !important;
+    }
+
+    .about-section-block.who-we-are {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+    }
+
+    .who-we-are-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .who-we-are-text-col {
+        text-align: center;
+    }
+
+    /* 2. Mission & Vision Cards (Larger, Prominent Image Sizing on Mobile) */
+    .pdf-banner-card {
+        height: 195px !important;
+        min-height: 180px !important;
+        margin-bottom: 1.2rem !important;
+        position: relative !important;
+    }
+
+    .pdf-banner-card.vision-card {
+        margin-top: 2rem !important;
+    }
+
+    .pdf-card-img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        object-position: center center !important;
+    }
+
+    .pdf-banner-card:not(.vision-card) .pdf-card-img {
+        object-position: 20% center !important;
+    }
+
+    .pdf-card-overlay-text {
+        font-size: 1.95rem !important;
+        font-weight: 800 !important;
+        right: 18px !important;
+        bottom: 14px !important;
+        text-shadow: 0 2px 12px rgba(0, 0, 0, 0.95) !important;
+    }
+
+    /* 3. Source of Unrivalled Strength Banner (Completely Fixed Text & Gun Visibility) */
+    .strength-banner-section {
+        margin: 1.8rem auto !important;
+        padding: 0 !important;
+    }
+
+    .strength-banner-card {
+        min-height: 245px !important;
+        height: auto !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        padding: 2rem 1.4rem !important;
+        position: relative !important;
+        overflow: hidden !important;
+        box-sizing: border-box !important;
+    }
+
+    .strength-bg-img {
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        object-position: 85% center !important;
+        display: block !important;
+    }
+
+    .strength-overlay {
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        background: linear-gradient(to right, rgba(0, 0, 0, 0.94) 0%, rgba(0, 0, 0, 0.75) 55%, rgba(0, 0, 0, 0.25) 100%) !important;
+    }
+
+    .strength-banner-content {
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+        transform: none !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+        z-index: 5 !important;
+        text-align: left !important;
+    }
+
+    .strength-subhead {
+        font-size: 0.72rem !important;
+        letter-spacing: 2px !important;
+        margin: 0 0 0.3rem 0 !important;
+        color: #d1d5db !important;
+    }
+
+    .strength-mainhead {
+        font-size: clamp(1.25rem, 5vw, 1.6rem) !important;
+        font-weight: 900 !important;
+        line-height: 1.18 !important;
+        margin: 0 0 0.5rem 0 !important;
+        color: #ffffff !important;
+        word-wrap: break-word !important;
+    }
+
+    .strength-desc {
+        font-size: 0.82rem !important;
+        line-height: 1.45 !important;
+        color: #e2e8f0 !important;
+        max-width: 290px !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .about-pdf-wrapper {
+        padding: 0.6rem 1rem 2rem 1rem !important;
+    }
+
+    .pdf-section-title {
+        font-size: 1.75rem !important;
+    }
+
+    .pdf-section-subtitle {
+        font-size: 0.85rem !important;
+        margin-bottom: 1.2rem !important;
+    }
+
+    .pdf-banner-card {
+        height: 185px !important;
+        min-height: 170px !important;
+    }
+
+    .pdf-card-overlay-text {
+        font-size: 1.75rem !important;
+        right: 14px !important;
+        bottom: 10px !important;
+    }
+
+    .strength-banner-card {
+        min-height: 235px !important;
+        padding: 1.8rem 1.2rem !important;
+    }
+}
+
+/* ==========================================================================
+   AMMUNITION PAGE CUSTOM STYLES (EXACT MATCH TO REFERENCE DESIGN)
+   ========================================================================== */
+
+/* 1. Ammunition Hero Banner */
+.ammo-hero-section {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1920 / 507;
+    min-height: 280px;
+    max-height: 520px;
+    background-color: #0d0d0d;
+    background-image: url('../assets/images/AMMUNITION-01.webp');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 10%;
+    box-sizing: border-box;
+}
+
+.ammo-hero-content {
+    text-align: right;
+    z-index: 2;
+}
+
+.ammo-hero-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(2.8rem, 6.5vw, 5rem);
+    font-weight: 800;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin: 0;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+}
+
+/* 2. Ammunition Manufacturer Intro Section */
+.ammo-intro-section {
+    background-color: #ffffff;
+    padding: 2.5rem 2rem 1rem 2rem;
+    color: #0d0d0d;
+    text-align: center;
+}
+
+.ammo-intro-container {
+    max-width: 950px;
+    margin: 0 auto;
+}
+
+.ammo-intro-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    font-weight: 900;
+    color: #0d0d0d;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+    line-height: 1.25;
+}
+
+.ammo-intro-desc {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.05rem;
+    line-height: 1.65;
+    color: #333333;
+    font-weight: 500;
+    max-width: 880px;
+    margin: 0 auto;
+}
+
+/* 3. Manufactured Calibers Section */
+.ammo-calibers-section {
+    background-color: #ffffff;
+    padding: 1rem 2rem 1.5rem 2rem;
+    color: #0d0d0d;
+}
+
+.ammo-calibers-container {
+    max-width: 1050px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 4rem;
+}
+
+.ammo-calibers-image-col {
+    flex: 1 1 400px;
+    max-width: 480px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ammo-calibers-img {
+    max-width: 100%;
+    width: 420px;
+    height: auto;
+    display: block;
+    object-fit: contain;
+    filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.08));
+}
+
+.ammo-calibers-content-col {
+    flex: 1 1 420px;
+    text-align: left;
+}
+
+.ammo-calibers-heading {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+    font-weight: 900;
+    color: #0d0d0d;
+    text-transform: uppercase;
+    line-height: 1.08;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.5px;
+}
+
+.ammo-calibers-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.ammo-calibers-list li {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    margin-bottom: 0.85rem;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #0d0d0d;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.ammo-calibers-list li .plus-icon {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: #0d0d0d;
+    min-width: 14px;
+    display: inline-block;
+    line-height: 1;
+}
+
+@media (max-width: 868px) {
+    .ammo-hero-section {
+        aspect-ratio: unset !important;
+        min-height: 310px !important;
+        height: 40vh !important;
+        max-height: 420px !important;
+        background-size: cover !important;
+        background-position: center 60% !important;
+        background-repeat: no-repeat !important;
+        justify-content: center !important;
+        text-align: center !important;
+        padding: 0 1.5rem !important;
+    }
+
+    .ammo-hero-content {
+        text-align: center !important;
+        width: 100% !important;
+    }
+
+    .ammo-hero-title {
+        font-size: clamp(1.8rem, 5.5vw, 2.5rem) !important;
+        letter-spacing: 2.5px !important;
+        text-shadow: 0 4px 18px rgba(0, 0, 0, 0.9), 0 2px 5px rgba(0, 0, 0, 0.95) !important;
+    }
+
+    .ammo-calibers-container {
+        flex-direction: column;
+        gap: 2.5rem;
+    }
+
+    .ammo-calibers-content-col {
+        width: 100%;
+    }
+
+    .ammo-calibers-heading {
+        font-size: 2.2rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .ammo-hero-section {
+        aspect-ratio: unset !important;
+        min-height: 300px !important;
+        height: 38vh !important;
+        max-height: 390px !important;
+        background-position: center 65% !important;
+        padding: 0 1rem !important;
+    }
+
+    .ammo-hero-title {
+        font-size: 2rem !important;
+        letter-spacing: 2px !important;
+    }
+
+    .ammo-intro-section {
+        padding: 1.5rem 1.2rem 1rem 1.2rem !important;
+    }
+}
+
+/* 4. Cutting-Edge Ammunition Text Section */
+.ammo-cutting-edge-section {
+    background-color: #ffffff;
+    padding: 1.5rem 2rem 1.5rem 2rem;
+    color: #0d0d0d;
+    text-align: center;
+}
+
+.ammo-cutting-edge-container {
+    max-width: 950px;
+    margin: 0 auto;
+}
+
+.ammo-cutting-edge-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(1.4rem, 3vw, 1.8rem);
+    font-weight: 900;
+    color: #0d0d0d;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 1rem;
+}
+
+.ammo-cutting-edge-desc {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.02rem;
+    line-height: 1.7;
+    color: #444444;
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+}
+
+/* 5. Boxed Imperial Armoury Workbench Banner */
+.ammo-workbench-banner-section {
+    background-color: #ffffff;
+    padding: 0.5rem 2rem 0.5rem 2rem;
+}
+
+.ammo-workbench-banner-card {
+    max-width: 1000px;
+    margin: 0 auto;
+    min-height: 260px;
+    background-color: #0d0d0d;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)), url('../assets/images/AMMUNITION-03.webp');
+    background-size: cover;
+    background-position: center;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 2.2rem 2.5rem;
+    box-sizing: border-box;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.ammo-workbench-banner-content {
+    text-align: right;
+    color: #ffffff;
+    max-width: 600px;
+}
+
+.ammo-workbench-banner-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 900;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.6rem;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+.ammo-workbench-banner-text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.02rem;
+    line-height: 1.5;
+    color: #f0f0f0;
+    font-weight: 500;
+    margin: 0 0 0.3rem 0;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+}
+
+/* 6. Bravefire Precision Section */
+.ammo-bravefire-section {
+    background-color: #ffffff;
+    padding: 0.5rem 2rem 0.5rem 2rem;
+    color: #0d0d0d;
+    text-align: center;
+}
+
+.ammo-bravefire-container {
+    max-width: 950px;
+    margin: 0 auto;
+}
+
+.ammo-bravefire-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(1.4rem, 3vw, 1.8rem);
+    font-weight: 900;
+    color: #0d0d0d;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.5rem;
+}
+
+.ammo-bravefire-desc {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.02rem;
+    line-height: 1.7;
+    color: #444444;
+    font-weight: 500;
+}
+
+/* 7. Boxed Follow Us Banner */
+.ammo-followus-banner-section {
+    background-color: #ffffff;
+    padding: 0.5rem 2rem 1rem 2rem;
+}
+
+.ammo-followus-banner-card {
+    max-width: 1000px;
+    margin: 0 auto;
+    min-height: 250px;
+    background-color: #0d0d0d;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.6) 50%, rgba(0, 0, 0, 0.2) 100%), url('../assets/images/AMMUNITION-04.webp');
+    background-size: cover;
+    background-position: center;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 2.2rem 2.5rem;
+    box-sizing: border-box;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.ammo-followus-content {
+    text-align: left;
+    color: #ffffff;
+    max-width: 450px;
+}
+
+.ammo-followus-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(1.4rem, 2.5vw, 1.8rem);
+    font-weight: 900;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.75rem;
+}
+
+.ammo-followus-text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.98rem;
+    line-height: 1.5;
+    color: #e0e0e0;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+}
+
+.ammo-followus-socials {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+}
+
+.ammo-social-btn {
+    width: 38px;
+    height: 38px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #0d0d0d;
+    transition: transform 0.25s ease, background-color 0.25s ease;
+    text-decoration: none;
+}
+
+.ammo-social-btn:hover {
+    transform: translateY(-3px);
+    background-color: #e0e0e0;
+}
+
+.ammo-social-btn svg {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+}
+
+@media (max-width: 768px) {
+
+    .ammo-workbench-banner-card,
+    .ammo-followus-banner-card {
+        padding: 2.5rem 1.5rem;
+        min-height: auto;
+        justify-content: center;
+    }
+
+    .ammo-workbench-banner-content {
+        text-align: center;
+    }
+
+    .ammo-followus-content {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+/* ==========================================================================
+   CONTACT PAGE CUSTOM STYLES (EXACT MATCH TO REFERENCE DESIGN)
+   ========================================================================== */
+
+/* 1. Contact Hero Section */
+.contact-hero-section {
+    position: relative;
+    width: 100%;
+    min-height: 480px;
+    height: 55vh;
+    max-height: 600px;
+    background-color: #0d0d0d;
+    background-image: url('../assets/images/Contact-01.webp');
+    background-size: cover;
+    background-position: center center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.contact-hero-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(2.8rem, 6.5vw, 5rem);
+    font-weight: 900;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin: 0;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+}
+
+/* 2. Contact Intro Text Section */
+.contact-intro-section {
+    background-color: #ffffff;
+    padding: 3rem 2rem 2rem 2rem;
+    color: #0d0d0d;
+    text-align: center;
+}
+
+.contact-intro-container {
+    max-width: 880px;
+    margin: 0 auto;
+}
+
+.contact-intro-text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.05rem;
+    line-height: 1.65;
+    color: #333333;
+    font-weight: 500;
+    margin: 0;
+}
+
+/* 3. Boxed Contact Form & Info Section */
+.contact-form-section {
+    background-color: #ffffff;
+    padding: 0.5rem 2rem 2.5rem 2rem;
+}
+
+.contact-card-box {
+    max-width: 1000px;
+    margin: 0 auto;
+    background-color: #c2c2c2;
+    padding: 2.2rem 2.5rem;
+    border-radius: 2px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2.5rem;
+}
+
+.contact-info-col {
+    flex: 1 1 340px;
+    text-align: left;
+    color: #1a1a1a;
+}
+
+.contact-info-col h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0 0 1.25rem 0;
+}
+
+.contact-info-divider {
+    border: none;
+    border-bottom: 1px solid #777777;
+    margin: 1.5rem 0;
+}
+
+.contact-info-col h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0 0 0.75rem 0;
+}
+
+.contact-info-col p {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #222222;
+    font-weight: 500;
+    margin: 0;
+}
+
+.contact-form-col {
+    flex: 1 1 440px;
+}
+
+.contact-form-group {
+    margin-bottom: 0.9rem;
+    text-align: left;
+}
+
+.contact-form-group label {
+    display: block;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #222222;
+    margin-bottom: 0.3rem;
+}
+
+.contact-form-group input,
+.contact-form-group select,
+.contact-form-group textarea {
+    width: 100%;
+    padding: 0.6rem 0.8rem;
+    border: 1px solid #888888;
+    background-color: #ffffff;
+    border-radius: 2px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.95rem;
+    color: #111111;
+    box-sizing: border-box;
+    outline: none;
+}
+
+.contact-form-group input:focus,
+.contact-form-group textarea:focus {
+    border-color: #000000;
+    box-shadow: 0 0 0 1px #000000;
+}
+
+/* 4. Contact Follow Us Banner */
+.contact-followus-section {
+    background-color: #ffffff;
+    padding: 0.5rem 2rem 3rem 2rem;
+}
+
+.contact-followus-card {
+    max-width: 1000px;
+    margin: 0 auto;
+    min-height: 240px;
+    background-color: #0d0d0d;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.6) 50%, rgba(0, 0, 0, 0.15) 100%), url('../assets/images/Contact-01.webp');
+    background-size: cover;
+    background-position: center;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 2.2rem 2.5rem;
+    box-sizing: border-box;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+@media (max-width: 868px) {
+    .contact-card-box {
+        flex-direction: column;
+        gap: 2.5rem;
+        padding: 2.5rem 1.5rem;
+    }
+
+    .contact-form-col {
+        width: 100%;
+    }
+
+    .contact-followus-card {
+        padding: 2.5rem 1.5rem;
+    }
+}
