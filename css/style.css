@@ -1841,19 +1841,65 @@ button {
 @media (max-width: 768px) {
     .about-hero {
         aspect-ratio: unset !important;
-        min-height: 310px !important;
-        height: 42vh !important;
-        max-height: 420px !important;
+        min-height: 250px !important;
+        height: 38vh !important;
+        max-height: 340px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        position: relative !important;
+        overflow: hidden !important;
+        background-color: #0d0d0d !important;
     }
 
     .about-hero .hero-bg-image {
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        background-image: url('../assets/images/About-01.webp') !important;
         background-size: cover !important;
-        background-position: center 65% !important;
+        background-position: 30% center !important;
+        background-repeat: no-repeat !important;
+        filter: none !important;
+    }
+
+    .about-hero .hero-overlay {
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0.15) 50%, rgba(0, 0, 0, 0.4) 100%) !important;
+        display: block !important;
+        z-index: 2 !important;
+    }
+
+    .about-hero .hero-content {
+        position: absolute !important;
+        top: 50% !important;
+        left: 50% !important;
+        transform: translate(-50%, -50%) !important;
+        width: 100% !important;
+        padding: 0 1rem !important;
+        text-align: center !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        z-index: 5 !important;
+        pointer-events: none !important;
     }
 
     .about-hero .hero-content h1 {
-        font-size: 2.1rem !important;
-        letter-spacing: 2.5px !important;
+        font-size: clamp(1.6rem, 6vw, 2.1rem) !important;
+        letter-spacing: 3px !important;
+        margin: 0 !important;
+        margin-left: 0 !important;
+        text-align: center !important;
+        color: #ffffff !important;
+        text-shadow: 0 3px 12px rgba(0, 0, 0, 0.95), 0 0 20px rgba(0, 0, 0, 0.9) !important;
+        line-height: 1.2 !important;
     }
 }
 
@@ -3324,10 +3370,12 @@ button {
     }
 
     /* Parallax & Gun Background Fix on Mobile */
-    .parallax-section {
+    .parallax-section,
+    .parallax-section.align-left {
         height: auto !important;
         min-height: 480px !important;
         padding: 3.5rem 1.5rem 2.5rem 1.5rem !important;
+        padding-top: 3.5rem !important;
         display: flex !important;
         align-items: flex-end !important;
         justify-content: center !important;
@@ -3348,49 +3396,92 @@ button {
     }
 
     .parallax-section.align-left .parallax-bg-fixed {
-        background-position: 42% 45% !important;
+        background-position: 45% 38% !important;
     }
 
-    .parallax-overlay {
+    .parallax-overlay,
+    .parallax-section.align-left .parallax-overlay {
         background: linear-gradient(to top, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.35) 55%, rgba(0, 0, 0, 0.15) 100%) !important;
     }
 
-    .parallax-content {
+    .parallax-content,
+    .parallax-section.align-left .parallax-content {
         width: 100% !important;
+        max-width: 100% !important;
         padding: 0 !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        margin: 0 !important;
         display: flex !important;
         justify-content: center !important;
+        align-items: center !important;
     }
 
-    .parallax-text-container {
+    .parallax-text-container,
+    .parallax-section.align-left .parallax-text-container {
+        display: flex !important;
+        flex-direction: column !important;
         align-items: center !important;
         text-align: center !important;
         margin: 0 auto !important;
+        margin-right: auto !important;
+        margin-left: auto !important;
+        padding: 0 !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
         width: 100% !important;
+        max-width: 520px !important;
     }
 
-    .parallax-text-container h2 {
+    .parallax-text-container h2,
+    .parallax-section.align-left .parallax-text-container h2 {
         font-size: clamp(1.4rem, 4.5vw, 1.85rem) !important;
         white-space: normal !important;
         text-align: center !important;
         line-height: 1.2 !important;
+        margin-bottom: 0.35rem !important;
+        text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8) !important;
     }
 
-    .parallax-subtitle {
+    .parallax-subtitle,
+    .parallax-section.align-left .parallax-subtitle {
         font-size: 0.82rem !important;
+        letter-spacing: 1px !important;
         text-align: center !important;
+        margin-bottom: 0.5rem !important;
+        text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8) !important;
     }
 
-    .parallax-badge {
+    .parallax-badge,
+    .parallax-section.align-left .parallax-badge {
+        background-color: #e5e5e5 !important;
+        color: #121212 !important;
         font-size: 0.7rem !important;
+        font-weight: 700 !important;
+        padding: 0.25rem 0.6rem !important;
         white-space: normal !important;
         text-align: center !important;
         line-height: 1.35 !important;
-        margin-bottom: 1rem !important;
+        margin: 0 auto 0.85rem auto !important;
+        display: inline-block !important;
+        border-radius: 1px !important;
+        max-width: 95% !important;
     }
 
-    .parallax-btn {
+    .parallax-btn,
+    .parallax-section.align-left .parallax-btn {
+        display: inline-block !important;
+        background-color: #121212 !important;
+        color: #ffffff !important;
+        font-size: 0.78rem !important;
+        font-weight: 600 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 1px !important;
+        padding: 0.45rem 1.4rem !important;
+        border-radius: 1px !important;
         align-self: center !important;
+        margin: 0 auto !important;
+        text-align: center !important;
     }
 }
 
@@ -3983,54 +4074,91 @@ button {
     }
 
     /* Parallax Section */
-    .parallax-section {
-        min-height: 50vh;
-        height: auto;
-        padding: 4rem 0;
-        align-items: center;
-        justify-content: flex-end;
+    .parallax-section,
+    .parallax-section.align-left {
+        min-height: 480px !important;
+        height: auto !important;
+        padding: 3.5rem 1.5rem 2.5rem 1.5rem !important;
+        padding-top: 3.5rem !important;
+        display: flex !important;
+        align-items: flex-end !important;
+        justify-content: center !important;
     }
 
-    .parallax-content {
-        padding: 0 1.5rem;
-        justify-content: flex-end;
-        width: 100%;
+    .parallax-content,
+    .parallax-section.align-left .parallax-content {
+        padding: 0 !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        margin: 0 !important;
+        justify-content: center !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        display: flex !important;
     }
 
-    .parallax-text-container {
-        align-items: flex-end;
-        text-align: right;
-        width: 100%;
-        max-width: 100%;
+    .parallax-text-container,
+    .parallax-section.align-left .parallax-text-container {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        margin: 0 auto !important;
+        margin-right: auto !important;
+        margin-left: auto !important;
+        padding: 0 !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        width: 100% !important;
+        max-width: 520px !important;
     }
 
-    .parallax-text-container h2 {
-        white-space: normal;
-        font-size: 1.5rem;
-        line-height: 1.25;
-        text-align: right;
+    .parallax-text-container h2,
+    .parallax-section.align-left .parallax-text-container h2 {
+        white-space: normal !important;
+        font-size: clamp(1.4rem, 4.5vw, 1.85rem) !important;
+        line-height: 1.2 !important;
+        text-align: center !important;
+        margin-bottom: 0.35rem !important;
     }
 
-    .parallax-subtitle {
-        font-size: 0.82rem;
-        text-align: right;
-        margin-bottom: 0.5rem;
+    .parallax-subtitle,
+    .parallax-section.align-left .parallax-subtitle {
+        font-size: 0.82rem !important;
+        letter-spacing: 1px !important;
+        text-align: center !important;
+        margin-bottom: 0.5rem !important;
     }
 
-    .parallax-badge {
-        white-space: normal;
-        line-height: 1.4;
-        text-align: right;
-        font-size: 0.65rem;
-        padding: 0.25rem 0.5rem;
-        margin-bottom: 0.5rem;
-        display: inline-block;
+    .parallax-badge,
+    .parallax-section.align-left .parallax-badge {
+        background-color: #e5e5e5 !important;
+        color: #121212 !important;
+        white-space: normal !important;
+        line-height: 1.35 !important;
+        text-align: center !important;
+        font-size: 0.7rem !important;
+        padding: 0.25rem 0.6rem !important;
+        margin: 0 auto 0.85rem auto !important;
+        display: inline-block !important;
+        border-radius: 1px !important;
+        max-width: 95% !important;
     }
 
-    .parallax-btn {
-        font-size: 0.75rem;
-        padding: 0.4rem 1.2rem;
-        align-self: flex-end;
+    .parallax-btn,
+    .parallax-section.align-left .parallax-btn {
+        display: inline-block !important;
+        background-color: #121212 !important;
+        color: #ffffff !important;
+        font-size: 0.78rem !important;
+        font-weight: 600 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 1px !important;
+        padding: 0.45rem 1.4rem !important;
+        border-radius: 1px !important;
+        align-self: center !important;
+        margin: 0 auto !important;
+        text-align: center !important;
     }
 
     /* Feature Highlights */
@@ -5348,20 +5476,21 @@ img {
 }
 
 .pdf-section-title {
-    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    font-size: clamp(3.1rem, 3.5vw, 2.6rem);
     font-weight: 800;
     text-transform: uppercase;
     color: #000000;
-    margin-bottom: 0.35rem;
-    margin-top: 0;
+    margin-bottom: 1.25rem;
+    margin-top: -11px;
     letter-spacing: 1px;
     font-family: var(--font-body);
 }
 
 .pdf-section-title.title-medium {
-    font-size: clamp(1.3rem, 2.8vw, 1.9rem);
+    font-size: clamp(1.3rem, 1.8vw, 1.9rem);
     line-height: 1.3;
     max-width: 920px;
+    margin-top: 3rem;
     margin-left: auto;
     margin-right: auto;
 }
@@ -5381,6 +5510,7 @@ img {
     display: grid;
     grid-template-columns: 1.35fr 1fr;
     gap: 2rem;
+    margin-left: -2rem;
     align-items: center;
     text-align: left;
 }
@@ -5397,13 +5527,14 @@ img {
 .who-we-are-text-col p,
 .pdf-text-block p {
     font-size: 1.35rem;
+    font-weight: 450;
     line-height: 1.3;
     color: #2b2b2b;
 }
 
 .who-we-are-text-col p:last-child,
 .pdf-text-block p:last-child {
-    margin-bottom: 65px
+    margin-bottom: 70px
 }
 
 /* 2. MISSION & VISION BANNER CARDS */
@@ -5487,8 +5618,8 @@ img {
 
 .strength-banner-content {
     position: absolute;
-    left: 5%;
-    top: 50%;
+    left: 3%;
+    top: 62%;
     transform: translateY(-50%);
     z-index: 3;
     max-width: 520px;
@@ -5508,18 +5639,18 @@ img {
 }
 
 .strength-mainhead {
-    font-size: clamp(1.3rem, 2.8vw, 2.1rem);
-    font-weight: 900;
+    font-size: clamp(1.3rem, 1.8vw, 2.1rem);
+    font-weight: 400;
     text-transform: uppercase;
     letter-spacing: 1px;
     color: #ffffff;
     margin: 0 0 0.75rem 0;
-    line-height: 1.15;
+    line-height: 0.7;
     font-family: var(--font-body);
 }
 
 .strength-desc {
-    font-size: clamp(0.85rem, 1.4vw, 1.05rem);
+    font-size: clamp(0.85rem, 1.4vw, 2.05rem);
     line-height: 1.4;
     color: #d1d5db;
     margin: 0;
@@ -5529,7 +5660,23 @@ img {
 /* RESPONSIVE BREAKPOINTS FOR ABOUT US PDF IMPLEMENTATION */
 @media (max-width: 868px) {
     .about-pdf-wrapper {
-        padding: 0.8rem 1.25rem 2.5rem 1.25rem !important;
+        padding: 1.25rem 1rem 2.5rem 1rem !important;
+        overflow-x: hidden !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Remove hardcoded desktop line-breaks on mobile for smooth natural paragraph wrapping */
+    .who-we-are-text-col br,
+    .pdf-text-block br,
+    .strength-banner-content br {
+        display: none !important;
+    }
+
+    .about-section-block {
+        margin: 0 auto 2.2rem auto !important;
+        width: 100% !important;
+        padding: 0 !important;
     }
 
     .about-section-block.who-we-are {
@@ -5537,25 +5684,120 @@ img {
         padding-top: 0 !important;
     }
 
+    /* Headings & Subtitles */
+    .pdf-section-title {
+        font-size: clamp(1.45rem, 5.5vw, 1.85rem) !important;
+        font-weight: 800 !important;
+        letter-spacing: 0.5px !important;
+        margin-top: 0 !important;
+        margin-bottom: 0.5rem !important;
+        line-height: 1.25 !important;
+        text-align: center !important;
+    }
+
+    .pdf-section-title.title-medium {
+        font-size: clamp(1.15rem, 4.2vw, 1.45rem) !important;
+        margin-top: 1.8rem !important;
+        margin-bottom: 0.8rem !important;
+        line-height: 1.3 !important;
+        text-align: center !important;
+    }
+
+    .pdf-section-subtitle {
+        font-size: clamp(0.75rem, 3.2vw, 0.88rem) !important;
+        font-weight: 600 !important;
+        letter-spacing: 0.5px !important;
+        margin-top: 0 !important;
+        margin-bottom: 1.2rem !important;
+        line-height: 1.4 !important;
+        text-align: center !important;
+    }
+
+    /* Override inline negative margins on mobile */
+    .manufacturing-excellence .pdf-section-title {
+        margin-top: 1.5rem !important;
+        margin-bottom: 0.5rem !important;
+    }
+
+    .manufacturing-excellence .pdf-section-subtitle {
+        margin-top: 0 !important;
+        margin-bottom: 1.2rem !important;
+    }
+
+    .manufacturing-excellence .pdf-text-block {
+        margin-top: 0 !important;
+    }
+
+    .future-defence .pdf-section-title {
+        margin-top: 1.8rem !important;
+        margin-bottom: 0.8rem !important;
+    }
+
+    .future-defence .pdf-text-block p:last-child {
+        margin-bottom: 1.5rem !important;
+    }
+
+    /* 1. Who We Are Section */
     .who-we-are-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem !important;
+        margin: 0 auto !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        width: 100% !important;
     }
 
-    .who-we-are-text-col {
-        text-align: center;
+    .who-we-are-img-col {
+        width: 100% !important;
+        display: flex !important;
+        justify-content: center !important;
     }
 
-    /* 2. Mission & Vision Cards (Larger, Prominent Image Sizing on Mobile) */
+    .who-we-are-img-col .pdf-img {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        margin: 0 auto !important;
+        margin-left: 0 !important;
+        display: block !important;
+        border-radius: 3px !important;
+    }
+
+    .who-we-are-text-col,
+    .pdf-text-block {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+        padding: 0 !important;
+        text-align: center !important;
+    }
+
+    .who-we-are-text-col p,
+    .pdf-text-block p {
+        font-size: clamp(0.9rem, 3.8vw, 1rem) !important;
+        line-height: 1.65 !important;
+        color: #333333 !important;
+        margin-bottom: 0.95rem !important;
+        text-align: center !important;
+    }
+
+    .who-we-are-text-col p:last-child,
+    .pdf-text-block p:last-child {
+        margin-bottom: 1.4rem !important;
+    }
+
+    /* 2. Mission & Vision Cards */
     .pdf-banner-card {
-        height: 195px !important;
-        min-height: 180px !important;
+        height: 190px !important;
+        min-height: 175px !important;
         margin-bottom: 1.2rem !important;
         position: relative !important;
+        border-radius: 4px !important;
+        overflow: hidden !important;
     }
 
     .pdf-banner-card.vision-card {
-        margin-top: 2rem !important;
+        margin-top: 1.8rem !important;
     }
 
     .pdf-card-img {
@@ -5570,29 +5812,30 @@ img {
     }
 
     .pdf-card-overlay-text {
-        font-size: 1.95rem !important;
+        font-size: 1.85rem !important;
         font-weight: 800 !important;
         right: 18px !important;
         bottom: 14px !important;
         text-shadow: 0 2px 12px rgba(0, 0, 0, 0.95) !important;
     }
 
-    /* 3. Source of Unrivalled Strength Banner (Completely Fixed Text & Gun Visibility) */
+    /* 3. Source of Unrivalled Strength Banner */
     .strength-banner-section {
-        margin: 1.8rem auto !important;
+        margin: 2rem auto !important;
         padding: 0 !important;
     }
 
     .strength-banner-card {
-        min-height: 245px !important;
+        min-height: 250px !important;
         height: auto !important;
         display: flex !important;
         align-items: center !important;
         justify-content: flex-start !important;
-        padding: 2rem 1.4rem !important;
+        padding: 2.2rem 1.4rem !important;
         position: relative !important;
         overflow: hidden !important;
         box-sizing: border-box !important;
+        border-radius: 4px !important;
     }
 
     .strength-bg-img {
@@ -5612,7 +5855,7 @@ img {
         left: 0 !important;
         width: 100% !important;
         height: 100% !important;
-        background: linear-gradient(to right, rgba(0, 0, 0, 0.94) 0%, rgba(0, 0, 0, 0.75) 55%, rgba(0, 0, 0, 0.25) 100%) !important;
+        background: linear-gradient(to right, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.75) 55%, rgba(0, 0, 0, 0.25) 100%) !important;
     }
 
     .strength-banner-content {
@@ -5627,57 +5870,57 @@ img {
     }
 
     .strength-subhead {
-        font-size: 0.72rem !important;
+        font-size: 0.75rem !important;
         letter-spacing: 2px !important;
-        margin: 0 0 0.3rem 0 !important;
+        margin: 0 0 0.35rem 0 !important;
         color: #d1d5db !important;
     }
 
     .strength-mainhead {
-        font-size: clamp(1.25rem, 5vw, 1.6rem) !important;
-        font-weight: 900 !important;
-        line-height: 1.18 !important;
-        margin: 0 0 0.5rem 0 !important;
+        font-size: clamp(1.2rem, 5vw, 1.55rem) !important;
+        font-weight: 800 !important;
+        line-height: 1.2 !important;
+        margin: 0 0 0.6rem -11px !important;
         color: #ffffff !important;
         word-wrap: break-word !important;
     }
 
     .strength-desc {
-        font-size: 0.82rem !important;
-        line-height: 1.45 !important;
+        font-size: 0.85rem !important;
+        line-height: 1.5 !important;
         color: #e2e8f0 !important;
-        max-width: 290px !important;
+        max-width: 320px !important;
     }
 }
 
 @media (max-width: 576px) {
     .about-pdf-wrapper {
-        padding: 0.6rem 1rem 2rem 1rem !important;
+        padding: 1rem 0.85rem 2rem 0.85rem !important;
     }
 
     .pdf-section-title {
-        font-size: 1.75rem !important;
+        font-size: clamp(1.35rem, 5.2vw, 1.65rem) !important;
     }
 
     .pdf-section-subtitle {
-        font-size: 0.85rem !important;
-        margin-bottom: 1.2rem !important;
+        font-size: 0.82rem !important;
+        margin-bottom: 1rem !important;
     }
 
     .pdf-banner-card {
-        height: 185px !important;
-        min-height: 170px !important;
+        height: 180px !important;
+        min-height: 165px !important;
     }
 
     .pdf-card-overlay-text {
-        font-size: 1.75rem !important;
+        font-size: 1.65rem !important;
         right: 14px !important;
         bottom: 10px !important;
     }
 
     .strength-banner-card {
-        min-height: 235px !important;
-        padding: 1.8rem 1.2rem !important;
+        min-height: 240px !important;
+        padding: 1.8rem 1.15rem !important;
     }
 }
 
