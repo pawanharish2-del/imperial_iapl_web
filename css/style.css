@@ -1269,9 +1269,13 @@ button {
     left: 0;
     width: 100%;
     height: 100%;
-    background: transparent;
+    background: linear-gradient(to left, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.1) 50%, transparent 100%);
     pointer-events: none;
     z-index: 2;
+}
+
+.parallax-section.align-left .parallax-overlay {
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.1) 50%, transparent 100%);
 }
 
 .parallax-content {
@@ -1304,6 +1308,7 @@ button {
     white-space: nowrap;
     color: #ffffff;
     text-transform: uppercase;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
 }
 
 .parallax-text-container h2 strong {
@@ -1337,6 +1342,7 @@ button {
     color: #ffffff;
     text-transform: uppercase;
     text-align: right;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
 }
 
 .parallax-badge {
@@ -1533,7 +1539,7 @@ button {
 
 .catalog-grid-section {
     background-color: #ffffff;
-    padding: 1rem 2rem 2rem 2rem;
+    padding: 1rem 10.8rem 2.5rem 1.5rem;
     display: flex;
     justify-content: center;
 }
