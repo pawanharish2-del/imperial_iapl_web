@@ -1827,10 +1827,11 @@ button {
 
 .about-hero .hero-content h1 {
     font-family: var(--font-body);
-    font-size: clamp(2rem, 4.5vw, 3.5rem);
+    font-size: clamp(2rem, 4.5vw, 3.1rem);
     font-weight: 900;
     text-transform: uppercase;
-    margin: 0;
+    margin: -8.5rem;
+    margin-left: -19rem;
     letter-spacing: 4px;
     color: #ffffff;
     text-shadow: 0 4px 18px rgba(0, 0, 0, 0.75), 0 2px 4px rgba(0, 0, 0, 0.9);
@@ -3139,29 +3140,110 @@ button {
 }
 
 @media (max-width: 900px) {
+
+    .sniper-details-section,
+    .product-spotlight {
+        padding: 2.5rem 1.25rem !important;
+        overflow: hidden !important;
+    }
+
     .sniper-spotlight-container {
-        flex-direction: column;
-        text-align: center;
-        gap: 2.5rem;
+        flex-direction: column !important;
+        text-align: center !important;
+        gap: 1.5rem !important;
+        align-items: center !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important;
     }
 
     .spotlight-left {
-        align-items: center;
-        text-align: center;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        width: 100% !important;
+        margin: 0 auto !important;
+    }
+
+    .spotlight-left h2 {
+        margin: 0 auto 0.35rem auto !important;
+        margin-right: 0 !important;
+        margin-left: 0 !important;
+        text-align: center !important;
+        font-size: clamp(1.4rem, 5vw, 1.75rem) !important;
+        white-space: normal !important;
+    }
+
+    .spotlight-left .spotlight-subtitle {
+        margin: 0 auto 0.6rem auto !important;
+        margin-right: 0 !important;
+        margin-left: 0 !important;
+        text-align: center !important;
+        font-size: 0.95rem !important;
+        max-width: 320px !important;
+    }
+
+    .spotlight-left .spotlight-badge {
+        margin: 0 auto 0.5rem auto !important;
+        margin-right: 0 !important;
+        margin-left: 0 !important;
+        text-align: center !important;
+        display: inline-block !important;
+        font-size: 0.78rem !important;
+        white-space: normal !important;
+    }
+
+    .spotlight-left div {
+        text-align: center !important;
+        width: 100% !important;
+        display: flex !important;
+        justify-content: center !important;
+    }
+
+    .spotlight-left .spotlight-btn {
+        margin: 0 auto !important;
+        margin-right: 0 !important;
+        margin-left: 0 !important;
+        display: inline-block !important;
+        text-align: center !important;
+    }
+
+    .spotlight-center {
+        width: 100% !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        margin: 1rem 0 !important;
+    }
+
+    .spotlight-center img,
+    .spotlight-img,
+    .ammo-maker-img {
+        max-width: 250px !important;
+        width: 72% !important;
+        height: auto !important;
+        margin: 0 auto !important;
+        display: block !important;
     }
 
     .spotlight-right {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        width: 100%;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        width: 100% !important;
+        margin: 0 auto !important;
     }
 
     .spotlight-desc {
-        text-align: center;
-        margin: 0 auto 1.2rem auto;
-        max-width: 320px;
+        text-align: center !important;
+        margin: 0 auto 1.2rem auto !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        max-width: 320px !important;
+        font-size: 0.95rem !important;
+        line-height: 1.4 !important;
     }
 
     .spotlight-features {
@@ -3170,9 +3252,13 @@ button {
         align-items: flex-start !important;
         text-align: left !important;
         width: 100% !important;
-        max-width: 320px !important;
+        max-width: 280px !important;
         margin: 0 auto !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        margin-bottom: 0 !important;
         padding: 0 !important;
+        list-style: none !important;
     }
 
     .spotlight-features li {
@@ -3183,15 +3269,17 @@ button {
         width: 100% !important;
         margin-bottom: 0.45rem !important;
         white-space: nowrap !important;
+        font-size: 0.72rem !important;
+        gap: 0.4rem !important;
     }
 
     .spotlight-features li span {
         display: inline-block !important;
-        min-width: 16px !important;
-        width: 16px !important;
-        text-align: left !important;
-        margin-right: 8px !important;
-        font-weight: 800 !important;
+        min-width: 12px !important;
+        width: 12px !important;
+        text-align: center !important;
+        margin-right: 4px !important;
+        font-weight: 900 !important;
         color: #666666 !important;
         flex-shrink: 0 !important;
     }
@@ -3325,35 +3413,115 @@ button {
         white-space: normal;
     }
 
+    /* Scroll Animate Reset on Mobile to prevent 75px offset */
+    .scroll-animate-left.visible {
+        margin-left: 0 !important;
+    }
+
     /* Vertical Rifle Section (+ Points Left-Aligned in Clean Column) */
+    .vertical-rifle-section {
+        padding: 2.5rem 1.25rem 2rem 1.25rem !important;
+        overflow: hidden !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+    }
+
     .vertical-rifle-container {
-        flex-direction: column;
-        text-align: center;
-        gap: 2.5rem;
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        gap: 1.5rem !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+    }
+
+    .vertical-rifle-image {
+        flex: none !important;
+        width: 100% !important;
+        max-width: 220px !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        margin: 0 auto !important;
+        position: relative !important;
+        z-index: 1 !important;
+    }
+
+    .vertical-rifle-image img {
+        max-height: 420px !important;
+        width: auto !important;
+        max-width: 100% !important;
+        height: auto !important;
+        object-fit: contain !important;
+        display: block !important;
+        margin: 0 auto !important;
     }
 
     .vertical-rifle-content {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        width: 100%;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin-left: 0 !important;
+        padding: 0 !important;
+        position: relative !important;
+        z-index: 2 !important;
     }
 
     .vertical-rifle-content h2 {
-        font-size: 3.35rem;
-        line-height: 1.15;
+        font-size: clamp(1.4rem, 5.5vw, 1.9rem) !important;
+        line-height: 1.2 !important;
+        margin: 0 auto 0.5rem auto !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        text-align: center !important;
+        white-space: normal !important;
+    }
+
+    .vertical-rifle-subtitle {
+        font-size: 0.85rem !important;
+        margin: 0 auto 0.6rem auto !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        text-align: center !important;
+        white-space: normal !important;
+    }
+
+    .vertical-rifle-badge {
+        font-size: 0.78rem !important;
+        padding: 0.25rem 0.65rem !important;
+        margin: 0 auto 0.6rem auto !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        text-align: center !important;
+        display: inline-block !important;
+    }
+
+    .vertical-rifle-btn {
+        font-size: 0.82rem !important;
+        padding: 0.35rem 1rem !important;
+        margin: 0 auto 1.5rem auto !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        text-align: center !important;
+        display: inline-block !important;
     }
 
     .vertical-rifle-specs-container {
         display: flex !important;
         flex-direction: column !important;
-        align-items: flex-start !important;
-        text-align: left !important;
+        align-items: center !important;
         width: 100% !important;
-        max-width: 350px !important;
+        max-width: 320px !important;
         margin: 0 auto !important;
-        padding: 0 !important;
+        padding: 0 0.5rem !important;
+        box-sizing: border-box !important;
     }
 
     .vertical-rifle-specs {
@@ -3362,10 +3530,10 @@ button {
         align-items: flex-start !important;
         text-align: left !important;
         width: 100% !important;
-        margin: 0 !important;
+        margin: 0 auto !important;
         padding: 0 !important;
         list-style: none !important;
-        gap: 0.6rem !important;
+        gap: 0.55rem !important;
     }
 
     .vertical-rifle-specs li {
@@ -3374,8 +3542,10 @@ button {
         justify-content: flex-start !important;
         text-align: left !important;
         width: 100% !important;
-        font-size: 0.75rem !important;
+        font-size: 0.7rem !important;
         padding: 0 !important;
+        margin-left: 0 !important;
+        gap: 0.65rem !important;
         white-space: nowrap !important;
     }
 
@@ -3383,61 +3553,88 @@ button {
         display: inline-block !important;
         min-width: 14px !important;
         width: 14px !important;
-        text-align: left !important;
-        margin-right: 6px !important;
+        text-align: center !important;
+        margin-right: 4px !important;
         font-weight: 900 !important;
         color: #111111 !important;
         flex-shrink: 0 !important;
     }
 
     /* Catalog Grid */
+    .catalog-grid-section {
+        padding: 1.5rem 1.25rem 2.5rem 1.25rem !important;
+        display: flex !important;
+        justify-content: center !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
     .catalog-grid-container {
-        grid-template-columns: 1fr;
-        gap: 1.2rem;
+        grid-template-columns: 1fr !important;
+        gap: 1.25rem !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
     }
 
     .catalog-card {
-        aspect-ratio: 16/9;
+        width: 100% !important;
+        aspect-ratio: 16/9 !important;
+        margin-left: 0 !important;
+    }
+
+    .catalog-card.scroll-animate-left.visible {
+        margin-left: 0 !important;
     }
 
     .catalog-card-content {
-        padding: 1rem;
+        padding: 0.85rem 1rem !important;
+        margin-left: 0 !important;
     }
 
     .catalog-card-content h3 {
-        font-size: 1rem;
-        white-space: normal;
+        font-size: 1rem !important;
+        white-space: normal !important;
     }
 
     .catalog-card-content p {
-        font-size: 0.68rem;
+        font-size: 0.68rem !important;
     }
 
     .catalog-card-badge {
-        font-size: 0.6rem;
-        padding: 0.15rem 0.45rem;
-        margin-bottom: 0.4rem;
+        font-size: 0.62rem !important;
+        padding: 0.15rem 0.45rem !important;
+        margin-bottom: 0.4rem !important;
     }
 
     .catalog-card-btn {
-        font-size: 0.7rem;
-        padding: 0.35rem 0.85rem;
+        font-size: 0.7rem !important;
+        padding: 0.25rem 0.75rem !important;
     }
 
     .catalog-text-block {
-        padding: 0.5rem 0 0 0;
+        padding: 1rem 0 0 0 !important;
+        margin-left: 0 !important;
+        text-align: center !important;
+        align-items: center !important;
+    }
+
+    .catalog-text-block.scroll-animate-left.visible {
+        margin-left: 0 !important;
     }
 
     .catalog-text-block h2 {
-        font-size: 2rem !important;
-        margin-top: 0;
-        margin-bottom: 0.8rem;
-        line-height: 1.1;
+        font-size: 1.8rem !important;
+        margin-top: 0 !important;
+        margin-bottom: 0.8rem !important;
+        line-height: 1.1 !important;
+        text-align: center !important;
     }
 
     .catalog-text-block p {
-        font-size: 0.9rem;
-        line-height: 1.5;
+        font-size: 0.88rem !important;
+        line-height: 1.5 !important;
+        text-align: center !important;
     }
 
     .weapons-banner-link {
